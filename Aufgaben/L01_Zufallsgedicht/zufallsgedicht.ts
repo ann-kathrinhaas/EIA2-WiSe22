@@ -15,7 +15,7 @@ namespace Zufallsgedicht {
     //console.log(subjekt);
     //console.log(praedikat);
     //console.log(objekt);
-
+    
     for (let i: number = subjekt.length; i >= 1; i--) {
         //console.log(i);
         console.log(getVerse(subjekt, praedikat, objekt));
