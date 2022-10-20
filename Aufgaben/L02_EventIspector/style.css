@@ -35,6 +35,10 @@ h1 {
     margin-left: 50px;
 }
 
+#button:hover {
+    cursor: pointer;
+}
+
 #span {
     position: fixed;
     width: 200px;
