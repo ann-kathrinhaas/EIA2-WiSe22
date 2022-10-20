@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(218, 240, 218);
+}
+
+h1 {
+    margin-left: 50px;
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+
+#divContainer {
+    display: flex;
+}
+
+#div0, #div1 {
+    
+    background-color: rgb(231, 226, 226);
+    width: 700px;
+    height: 700px;
+    border: 2px solid rgb(194, 189, 189);
+}
+
+#div0 {
+    margin-left: 50px;
+    margin-right: 70px;
+}
+
+#button {
+    font-size: 25px;
+    background-color: rgb(194, 189, 189);
+    border: 2px solid rgb(151, 146, 146);
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#span {
+    position: fixed;
+    width: 200px;
+    height: 100px;
+    background-color: rgb(194, 189, 189);
+    border: 2px solid rgb(151, 146, 146);
+}
