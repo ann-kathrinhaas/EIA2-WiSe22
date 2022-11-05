@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <script src="data.js"></script>
+    <script src="generateContent.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Shopping List</h1>
+
+    <fieldset id="fsNewItem">
+        <legend>New Item</legend>
+        <input id="newItem" type="text" name="text" placeholder="Item" required>
+        <input id="newAmount" type="number" name="stepper" step="1" min="1" value="1">
+        <button id="addButton"><i class="fas fa-plus-circle"></i></button>
+        <textarea name="area" id="newComment" cols="30" rows="2" placeholder="Comment"></textarea>
+    </fieldset>
+
+    <fieldset id="fsItemList">
+
+        <!-- <div class="itemInfo">
+            <input type="checkbox" value="check1" checked>
+            <label for="check1">Milk</label>
+            <p class="amount">3</p>
+            <button class="deleteButton"><i class="trash fas fa-trash-alt"></i></button>
+            <input type="date" name="date" value="2022-10-29">
+            <input type="area" class="comment" cols="30" rows="1" >
+        </div>
+
+        <div class="itemInfo">
+            <input type="checkbox" value="check2">
+            <label for="check1">Pepper</label>
+            <p class="amount">4</p>
+            <button class="deleteButton"><i class="trash fas fa-trash-alt"></i></button>
+            <input type="date" name="date">
+            <input type="area" class="comment" cols="30" rows="1" value="Red">
+        </div>
+
+        <div class="itemInfo">
+            <input type="checkbox" value="check3" checked>
+            <label for="check3">Bread</label>
+            <p class="amount">1</p>
+            <button class="deleteButton"><i class="trash fas fa-trash-alt"></i></button>
+            <input type="date" name="date" value="2022-10-29">
+            <input type="area" class="comment" cols="30" rows="1" >
+        </div>
+
+        <div class="itemInfo">
+            <input type="checkbox" value="check4">
+            <label for="check4">Tomatoes</label>
+            <p class="amount">5</p>
+            <button class="deleteButton"><i class="trash fas fa-trash-alt"></i></button>
+            <input type="date" name="date">
+            <input type="area" class="comment" cols="30" rows="1" value="Cocktail">
+        </div> -->
+
+    </fieldset>
+
+</body>
+</html>
