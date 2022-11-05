@@ -57,12 +57,12 @@ namespace L04_Einkaufsliste {
         fsItemList.appendChild(createItemCheck);
 
         let createItemName: HTMLLabelElement = document.createElement("label");
-        createItemName.innerHTML = ;
+        //createItemName.innerHTML = ;
         fsItemList.appendChild(createItemName);
 
         let createItemAmount: HTMLElement = document.createElement("p"); 
         createItemAmount.classList.add("amount");
-        //createItemAmount.innerHTML = (newAmount as string);
+        //createItemAmount.innerHTML =;
         fsItemList.appendChild(createItemAmount);
 
         let createItemDeleteButton: HTMLButtonElement = document.createElement("button");
@@ -81,7 +81,7 @@ namespace L04_Einkaufsliste {
         createItemComment.setAttribute("placeholder", "Comment");
         createItemComment.setAttribute("cols", "30");
         createItemComment.setAttribute("rows", "1");
-        //createItemComment.value = ();
+        //createItemComment.value = ;
         fsItemList.appendChild(createItemComment);
 
     }

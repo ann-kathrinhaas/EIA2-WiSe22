@@ -42,11 +42,11 @@ var L04_Einkaufsliste;
         createItemCheck.setAttribute("type", "checkbox");
         fsItemList.appendChild(createItemCheck);
         let createItemName = document.createElement("label");
-        createItemName.innerHTML = ;
+        //createItemName.innerHTML = ;
         fsItemList.appendChild(createItemName);
         let createItemAmount = document.createElement("p");
         createItemAmount.classList.add("amount");
-        //createItemAmount.innerHTML = (newAmount as string);
+        //createItemAmount.innerHTML =;
         fsItemList.appendChild(createItemAmount);
         let createItemDeleteButton = document.createElement("button");
         createItemDeleteButton.classList.add("deleteButton");
@@ -62,7 +62,7 @@ var L04_Einkaufsliste;
         createItemComment.setAttribute("placeholder", "Comment");
         createItemComment.setAttribute("cols", "30");
         createItemComment.setAttribute("rows", "1");
-        //createItemComment.value = ();
+        //createItemComment.value = ;
         fsItemList.appendChild(createItemComment);
     }
     function addItem(_event) {
