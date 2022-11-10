@@ -13,67 +13,99 @@ var L04_Einkaufsliste;
         console.log("Init");
         L04_Einkaufsliste.generateContent(L04_Einkaufsliste.data); // erstellt Beispieleinträge mit Inhalten aus DataStructure
         let addButton = document.querySelector("#addButton");
-        let checkBoxes = document.querySelectorAll("input[type='checkbox']");
-        let deleteButtons = document.querySelectorAll(".deleteButton");
         addButton.addEventListener("click", addItem);
-        checkBoxes.forEach(checkBox => {
-            checkBox.addEventListener("click", checkItem);
-        });
-        deleteButtons.forEach(deleteButton => {
-            deleteButton.addEventListener("click", deleteItem);
-        });
     }
-    function createNewItem() {
-        console.log("Create New Item");
-        let name;
-        let amount;
-        let comment;
-        let date;
-        let check;
-        let fsItemList = document.querySelector("#fsItemList");
-        /*
-                let inputName: HTMLInputElement = document.querySelector("label");
-                let inputAmount: HTMLInputElement = document.querySelector(".amount");
-                let inputComment: HTMLTextAreaElement = document.querySelector(".comment");*/
-        let createItemDiv = document.createElement("div");
-        createItemDiv.classList.add("itemInfo");
-        fsItemList.appendChild(createItemDiv);
-        let createItemCheck = document.createElement("input");
-        createItemCheck.setAttribute("type", "checkbox");
-        fsItemList.appendChild(createItemCheck);
-        let createItemName = document.createElement("label");
-        //createItemName.innerHTML = ;
-        fsItemList.appendChild(createItemName);
-        let createItemAmount = document.createElement("p");
-        createItemAmount.classList.add("amount");
-        //createItemAmount.innerHTML =;
-        fsItemList.appendChild(createItemAmount);
-        let createItemDeleteButton = document.createElement("button");
-        createItemDeleteButton.classList.add("deleteButton");
-        createItemDeleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
-        createItemDiv.appendChild(createItemDeleteButton);
-        let createItemDate = document.createElement("input");
-        createItemDate.classList.add("date");
-        createItemDate.setAttribute("placeholder", "Date");
-        //createItemDate.value = ;
-        fsItemList.appendChild(createItemDate);
-        let createItemComment = document.createElement("input");
-        createItemComment.classList.add("comment");
-        createItemComment.setAttribute("placeholder", "Comment");
-        createItemComment.setAttribute("cols", "30");
-        createItemComment.setAttribute("rows", "1");
-        //createItemComment.value = ;
-        fsItemList.appendChild(createItemComment);
-    }
-    function addItem(_event) {
+    function addItem() {
         console.log("Add Item");
-        createNewItem();
+        let fsItemList = document.querySelector("#fsItemList");
+        let inputName = document.querySelector("#newItem");
+        let inputAmount = document.querySelector("#newAmount");
+        let inputComment = document.querySelector("#newComment");
+        // Div für Item Infos
+        let itemDiv = document.createElement("div");
+        itemDiv.classList.add("itemInfo");
+        fsItemList.appendChild(itemDiv);
+        itemDiv.style.position = "relative";
+        itemDiv.style.top = "20px";
+        itemDiv.addEventListener("click", deleteItem);
+        itemDiv.addEventListener("click", checkItem);
+        // Checkbox
+        let itemCheck = document.createElement("input");
+        itemCheck.setAttribute("type", "checkbox");
+        itemCheck.classList.add("checkbox");
+        itemDiv.appendChild(itemCheck);
+        // Name
+        let itemName = document.createElement("p");
+        itemName.classList.add("name");
+        itemName.innerHTML = inputName.value;
+        itemDiv.appendChild(itemName);
+        inputName.value = "";
+        // Amount
+        let itemAmount = document.createElement("p");
+        itemAmount.classList.add("amount");
+        itemAmount.innerHTML = inputAmount.value;
+        itemName.appendChild(itemAmount);
+        inputAmount.value = "";
+        // Edit Button
+        let editButton = document.createElement("button");
+        editButton.classList.add("editButton");
+        editButton.innerHTML = '<i class = "pen fas fa-pen"></i>';
+        itemName.appendChild(editButton);
+        editButton.style.position = "absolute";
+        editButton.style.right = "-148px";
+        editButton.style.top = "0px";
+        // Delete Button
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("deleteButton");
+        deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
+        itemName.appendChild(deleteButton);
+        deleteButton.style.position = "absolute";
+        deleteButton.style.right = "-168px";
+        deleteButton.style.top = "0px";
+        // Date
+        let itemDate = document.createElement("p");
+        itemDate.classList.add("date");
+        itemDate.setAttribute("placeholder", "Date");
+        itemDate.innerHTML = "Date";
+        itemDiv.appendChild(itemDate);
+        // Comment
+        let itemComment = document.createElement("input");
+        itemComment.classList.add("comment");
+        itemComment.setAttribute("placeholder", "Comment");
+        itemComment.setAttribute("cols", "30");
+        itemComment.setAttribute("rows", "1");
+        itemComment.value = inputComment.value;
+        itemDiv.appendChild(itemComment);
+        inputComment.value = "";
     }
     function checkItem(_event) {
         console.log("Check Item");
+        let target = _event.target;
+        let currentTarget = _event.currentTarget;
+        if (target.classList.contains("checkbox")) {
+            let date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            let checkDate = day + "." + month + "." + year;
+            console.log("Check Date: " + checkDate);
+            console.log(currentTarget);
+            let dateField = currentTarget.querySelector(".date");
+            dateField.setAttribute("placeholder", checkDate);
+            console.log(dateField);
+            dateField.innerHTML = checkDate;
+        }
     }
+    L04_Einkaufsliste.checkItem = checkItem;
     function deleteItem(_event) {
         console.log("Delete Item");
+        let target = _event.target;
+        let currentTarget = _event.currentTarget;
+        let parentElement = currentTarget.parentElement;
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+            parentElement.removeChild(currentTarget);
+        }
     }
+    L04_Einkaufsliste.deleteItem = deleteItem;
 })(L04_Einkaufsliste || (L04_Einkaufsliste = {}));
 //# sourceMappingURL=script.js.map

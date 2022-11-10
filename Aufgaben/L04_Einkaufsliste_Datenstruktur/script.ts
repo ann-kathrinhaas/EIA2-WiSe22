@@ -7,97 +7,131 @@ Quellen: -
 */
 
 namespace L04_Einkaufsliste {
-    
+
     window.addEventListener("load", handleLoad);
-    
+
 
     function handleLoad(): void {
-        console.log ("Init");
+        console.log("Init");
 
         generateContent(data); // erstellt Beispieleinträge mit Inhalten aus DataStructure
 
         let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addButton");
-        let checkBoxes: NodeListOf<HTMLInputElement> = document.querySelectorAll("input[type='checkbox']");
-        let deleteButtons: NodeListOf<HTMLInputElement> = document.querySelectorAll(".deleteButton");
-        
         addButton.addEventListener("click", addItem);
 
-        checkBoxes.forEach(checkBox => {
-            checkBox.addEventListener("click", checkItem);
-        });
-
-        deleteButtons.forEach(deleteButton => {
-            deleteButton.addEventListener("click", deleteItem);
-        });
-    }
-    
-    
-
-    function createNewItem(): void {
-        console.log("Create New Item");
-
-        let name: HTMLLabelElement;
-        let amount: number;
-        let comment: string;
-        let date: string;
-        let check: boolean;
-        
-        let fsItemList: HTMLElement = <HTMLFieldSetElement>document.querySelector("#fsItemList");
-/*
-        let inputName: HTMLInputElement = document.querySelector("label");
-        let inputAmount: HTMLInputElement = document.querySelector(".amount");
-        let inputComment: HTMLTextAreaElement = document.querySelector(".comment");*/
-
-        let createItemDiv: HTMLDivElement = document.createElement("div");
-        createItemDiv.classList.add("itemInfo");
-        fsItemList.appendChild(createItemDiv);
-
-        let createItemCheck: HTMLInputElement = document.createElement("input");
-        createItemCheck.setAttribute("type", "checkbox");
-        fsItemList.appendChild(createItemCheck);
-
-        let createItemName: HTMLLabelElement = document.createElement("label");
-        //createItemName.innerHTML = ;
-        fsItemList.appendChild(createItemName);
-
-        let createItemAmount: HTMLElement = document.createElement("p"); 
-        createItemAmount.classList.add("amount");
-        //createItemAmount.innerHTML =;
-        fsItemList.appendChild(createItemAmount);
-
-        let createItemDeleteButton: HTMLButtonElement = document.createElement("button");
-        createItemDeleteButton.classList.add("deleteButton");
-        createItemDeleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
-        createItemDiv.appendChild(createItemDeleteButton);
-
-        let createItemDate: HTMLInputElement = document.createElement("input");
-        createItemDate.classList.add("date");
-        createItemDate.setAttribute("placeholder", "Date");
-        //createItemDate.value = ;
-        fsItemList.appendChild(createItemDate);
-
-        let createItemComment: HTMLInputElement = document.createElement("input");
-        createItemComment.classList.add("comment");
-        createItemComment.setAttribute("placeholder", "Comment");
-        createItemComment.setAttribute("cols", "30");
-        createItemComment.setAttribute("rows", "1");
-        //createItemComment.value = ;
-        fsItemList.appendChild(createItemComment);
 
     }
 
-    function addItem(_event: MouseEvent): void {
+    function addItem(): void {
         console.log("Add Item");
 
-        createNewItem();
+        let fsItemList: HTMLElement = <HTMLFieldSetElement>document.querySelector("#fsItemList");
+        let inputName: HTMLInputElement = <HTMLInputElement>document.querySelector("#newItem");
+        let inputAmount: HTMLInputElement = <HTMLInputElement>document.querySelector("#newAmount");
+        let inputComment: HTMLTextAreaElement = <HTMLTextAreaElement>document.querySelector("#newComment");
+
+        // Div für Item Infos
+        let itemDiv: HTMLDivElement = document.createElement("div");
+        itemDiv.classList.add("itemInfo");
+        fsItemList.appendChild(itemDiv);
+        itemDiv.style.position = "relative";
+        itemDiv.style.top = "20px";
+        itemDiv.addEventListener("click", deleteItem);
+        itemDiv.addEventListener("click", checkItem);
+
+        // Checkbox
+        let itemCheck: HTMLInputElement = document.createElement("input");
+        itemCheck.setAttribute("type", "checkbox");
+        itemCheck.classList.add("checkbox");
+        itemDiv.appendChild(itemCheck);
+
+        // Name
+        let itemName: HTMLParagraphElement = <HTMLParagraphElement>document.createElement("p");
+        itemName.classList.add("name");
+        itemName.innerHTML = inputName.value;
+        itemDiv.appendChild(itemName);
+        inputName.value = "";
+
+        // Amount
+        let itemAmount: HTMLElement = document.createElement("p");
+        itemAmount.classList.add("amount");
+        itemAmount.innerHTML = inputAmount.value;
+        itemName.appendChild(itemAmount);
+        inputAmount.value = "";
+
+        // Edit Button
+        let editButton: HTMLButtonElement = document.createElement("button");
+        editButton.classList.add("editButton");
+        editButton.innerHTML = '<i class = "pen fas fa-pen"></i>';
+        itemName.appendChild(editButton);
+        editButton.style.position = "absolute";
+        editButton.style.right = "-148px";
+        editButton.style.top = "0px";
+
+        // Delete Button
+        let deleteButton: HTMLButtonElement = document.createElement("button");
+        deleteButton.classList.add("deleteButton");
+        deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
+        itemName.appendChild(deleteButton);
+        deleteButton.style.position = "absolute";
+        deleteButton.style.right = "-168px";
+        deleteButton.style.top = "0px";
+
+        // Date
+        let itemDate: HTMLElement = document.createElement("p");
+        itemDate.classList.add("date");
+        itemDate.setAttribute("placeholder", "Date");
+        itemDate.innerHTML = "Date";
+        itemDiv.appendChild(itemDate);
+
+        // Comment
+        let itemComment: HTMLInputElement = document.createElement("input");
+        itemComment.classList.add("comment");
+        itemComment.setAttribute("placeholder", "Comment");
+        itemComment.setAttribute("cols", "30");
+        itemComment.setAttribute("rows", "1");
+        itemComment.value = inputComment.value;
+        itemDiv.appendChild(itemComment);
+        inputComment.value = "";
+
     }
 
-    
-    function checkItem (_event: MouseEvent): void {
+    export function checkItem(_event: MouseEvent): void {
         console.log("Check Item");
+
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+
+        if (target.classList.contains("checkbox")) {
+            let date: Date = new Date();
+            let day: number = date.getDate();
+            let month: number = date.getMonth() + 1;
+            let year: number = date.getFullYear();
+            let checkDate: string = day + "." + month + "." + year;
+
+            console.log("Check Date: " + checkDate);
+
+            console.log(currentTarget);
+            
+            let dateField: Element = <Element>currentTarget.querySelector(".date");
+            dateField.setAttribute("placeholder", checkDate);
+            console.log(dateField);
+            dateField.innerHTML = checkDate;
+
+        }
+
     }
-    
-    function deleteItem (_event: MouseEvent): void {
+
+    export function deleteItem(_event: MouseEvent): void {
         console.log("Delete Item");
+
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+        let parentElement: HTMLElement = <HTMLElement>currentTarget.parentElement;
+
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+            parentElement.removeChild(currentTarget);
+        }
+
     }
 }

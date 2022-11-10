@@ -50,6 +50,7 @@ legend {
     font-size: 15px;
     color: rgb(97, 95, 95);
     border: 1px solid rgb(128, 166, 201);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #newAmount {
@@ -82,7 +83,7 @@ legend {
     margin-bottom: 20px;
 }
 
-input[type="checkbox"], label, .amount {
+input[type="checkbox"], label, .amount{
     display: inline;
     margin-bottom: 15px;
 }
@@ -91,9 +92,10 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-label {
+.name {
     position: relative;
     left: 5px;
+    display: inline-block;
 }
 
 .amount::after {
@@ -115,6 +117,10 @@ label {
     margin-left: 25px;
     margin-bottom: 5px;
     border: 1px solid rgb(128, 166, 201);
+    background-color: white;
+    color: grey;
+    font-size: smaller;
+    padding-left: 2px;
 }
 
 .comment {
@@ -129,10 +135,24 @@ label {
     background: none;
     color: #7a7a7a;
     position: absolute;
-    top: 22px;
+    top: 0px;
     right: 20px;
+    
 }
 
 .deleteButton:hover {
+    cursor: pointer;
+}
+
+.editButton {
+    border-width: 0;
+    background: none;
+    color: #7a7a7a;
+    position: absolute;
+    top: 0px;
+    right: 40px;
+}
+
+.editButton:hover {
     cursor: pointer;
 }
