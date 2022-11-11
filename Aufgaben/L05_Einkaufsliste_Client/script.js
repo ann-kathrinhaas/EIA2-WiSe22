@@ -99,6 +99,7 @@ var L05_Einkaufsliste;
             console.log(dateField);
             dateField.innerHTML = checkDate;
         }
+        sendDataToServer();
     }
     L05_Einkaufsliste.checkItem = checkItem;
     function deleteItem(_event) {
@@ -109,6 +110,7 @@ var L05_Einkaufsliste;
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
+        sendDataToServer();
     }
     L05_Einkaufsliste.deleteItem = deleteItem;
     async function sendDataToServer() {
@@ -121,7 +123,7 @@ var L05_Einkaufsliste;
         let responseText = await response.text();
         console.log("Response: " + response);
         console.log("Response Text: " + responseText);
-        alert("New Item Added");
+        alert("Data Sent");
     }
 })(L05_Einkaufsliste || (L05_Einkaufsliste = {}));
 //# sourceMappingURL=script.js.map

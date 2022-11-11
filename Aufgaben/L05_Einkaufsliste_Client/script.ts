@@ -122,8 +122,9 @@ namespace L05_Einkaufsliste {
             dateField.setAttribute("placeholder", checkDate);
             console.log(dateField);
             dateField.innerHTML = checkDate;
-
         }
+
+        sendDataToServer();
 
     }
 
@@ -137,6 +138,9 @@ namespace L05_Einkaufsliste {
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
+
+        sendDataToServer();
+        
     }
 
     async function sendDataToServer(): Promise<void> {
@@ -153,6 +157,6 @@ namespace L05_Einkaufsliste {
         console.log("Response: " + response);
         console.log("Response Text: " + responseText);
 
-        alert("New Item Added");
+        alert("Data Sent");
     }
 }
