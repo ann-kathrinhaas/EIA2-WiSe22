@@ -14,7 +14,7 @@ namespace L05_Einkaufsliste {
 
     export function generateContent(_data: Data): void {
 
-        let fsItemList: HTMLElement = <HTMLFormElement>document.querySelector("#fsItemList");
+        let itemList: HTMLElement = <HTMLFormElement>document.querySelector("#itemList");
         
         console.log("Entry");
 
@@ -23,10 +23,9 @@ namespace L05_Einkaufsliste {
             // Div für Item Infos
             let itemDiv: HTMLDivElement = document.createElement("div");
             itemDiv.classList.add("itemInfo");
-            fsItemList.appendChild(itemDiv);
+            itemList.appendChild(itemDiv);
             itemDiv.addEventListener("click", deleteItem);
             itemDiv.addEventListener("click", checkItem);
-            //itemDiv.addEventListener("click", editItem);
 
             // Checkbox
             let itemCheck: HTMLInputElement = document.createElement("input");

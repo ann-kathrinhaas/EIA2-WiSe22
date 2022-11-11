@@ -10,15 +10,14 @@ namespace L05_Einkaufsliste {
 
     window.addEventListener("load", handleLoad);
 
-
     async function handleLoad(): Promise<void> {
         console.log("Init");
 
-        let response: Response = await fetch("data.json");
+        let response: Response = await fetch("https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/data.json");
         let content: string = await response.text();
         let data: Data = JSON.parse(content);
 
-        generateContent(data); // erstellt Beispieleinträge mit Inhalten aus DataStructure
+        generateContent(data); // erstellt Beispieleinträge mit Inhalten aus data.json
 
         let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addButton");
         addButton.addEventListener("click", addItem);
@@ -29,7 +28,7 @@ namespace L05_Einkaufsliste {
     function addItem(): void {
         console.log("Add Item");
 
-        let fsItemList: HTMLElement = <HTMLFormElement>document.querySelector("#fsItemList");
+        let itemList: HTMLElement = <HTMLFormElement>document.querySelector("#itemList");
         let inputName: HTMLInputElement = <HTMLInputElement>document.querySelector("#newItem");
         let inputAmount: HTMLInputElement = <HTMLInputElement>document.querySelector("#newAmount");
         let inputComment: HTMLTextAreaElement = <HTMLTextAreaElement>document.querySelector("#newComment");
@@ -37,12 +36,11 @@ namespace L05_Einkaufsliste {
         // Div für Item Infos
         let itemDiv: HTMLDivElement = document.createElement("div");
         itemDiv.classList.add("itemInfo");
-        fsItemList.appendChild(itemDiv);
+        itemList.appendChild(itemDiv);
         itemDiv.style.position = "relative";
         itemDiv.style.top = "20px";
         itemDiv.addEventListener("click", deleteItem);
         itemDiv.addEventListener("click", checkItem);
-        //itemDiv.addEventListener("click", editItem);
 
         // Checkbox
         let itemCheck: HTMLInputElement = document.createElement("input");
@@ -99,6 +97,8 @@ namespace L05_Einkaufsliste {
         itemDiv.appendChild(itemComment);
         inputComment.value = "";
 
+        sendDataToServer();
+
     }
 
     export function checkItem(_event: MouseEvent): void {
@@ -138,24 +138,21 @@ namespace L05_Einkaufsliste {
             parentElement.removeChild(currentTarget);
         }
     }
-/*
-    export function editItem(_event: MouseEvent): void {
-        console.log("Edit Item");
 
-        let target: HTMLElement = <HTMLElement>_event.target;
-        let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+    async function sendDataToServer(): Promise<void> {
+        console.log("Send To Server");
 
-        if (target.classList.contains("editButton") || target.classList.contains("pen")) {
-            
-            let inputName: HTMLInputElement = <HTMLInputElement>document.querySelector("#newItem");
-            let inputAmount: HTMLInputElement = <HTMLInputElement>document.querySelector("#newAmount");
-            let inputComment: HTMLTextAreaElement = <HTMLTextAreaElement>document.querySelector("#newComment");
+        let formData: FormData = new FormData(document.forms[0]);
+        let url: string = "https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/einkaufsliste.html";
 
-            //let nameField: Element = <Element>currentTarget.querySelector(".name");
-            let itemName: HTMLParagraphElement = <HTMLParagraphElement>target.querySelector("p");
-            itemName.innerHTML = inputName.value;
+        let query: URLSearchParams = new URLSearchParams(<any>formData);
+        await fetch(url + "?" + query.toString());
 
+        let response: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response.text();
+        console.log("Response: " + response);
+        console.log("Response Text: " + responseText);
 
-        }
-    }*/
+        alert("New Item Added");
+    }
 }

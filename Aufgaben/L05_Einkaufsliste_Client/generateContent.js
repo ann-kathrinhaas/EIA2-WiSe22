@@ -2,16 +2,15 @@
 var L05_Einkaufsliste;
 (function (L05_Einkaufsliste) {
     function generateContent(_data) {
-        let fsItemList = document.querySelector("#fsItemList");
+        let itemList = document.querySelector("#itemList");
         console.log("Entry");
         for (let i = 0; i < _data.Entry.length; i++) {
             // Div für Item Infos
             let itemDiv = document.createElement("div");
             itemDiv.classList.add("itemInfo");
-            fsItemList.appendChild(itemDiv);
+            itemList.appendChild(itemDiv);
             itemDiv.addEventListener("click", L05_Einkaufsliste.deleteItem);
             itemDiv.addEventListener("click", L05_Einkaufsliste.checkItem);
-            //itemDiv.addEventListener("click", editItem);
             // Checkbox
             let itemCheck = document.createElement("input");
             itemCheck.setAttribute("type", "checkbox");

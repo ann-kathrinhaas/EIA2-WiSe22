@@ -11,28 +11,27 @@ var L05_Einkaufsliste;
     window.addEventListener("load", handleLoad);
     async function handleLoad() {
         console.log("Init");
-        let response = await fetch("data.json");
+        let response = await fetch("https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/data.json");
         let content = await response.text();
         let data = JSON.parse(content);
-        L05_Einkaufsliste.generateContent(data); // erstellt Beispieleinträge mit Inhalten aus DataStructure
+        L05_Einkaufsliste.generateContent(data); // erstellt Beispieleinträge mit Inhalten aus data.json
         let addButton = document.querySelector("#addButton");
         addButton.addEventListener("click", addItem);
     }
     function addItem() {
         console.log("Add Item");
-        let fsItemList = document.querySelector("#fsItemList");
+        let itemList = document.querySelector("#itemList");
         let inputName = document.querySelector("#newItem");
         let inputAmount = document.querySelector("#newAmount");
         let inputComment = document.querySelector("#newComment");
         // Div für Item Infos
         let itemDiv = document.createElement("div");
         itemDiv.classList.add("itemInfo");
-        fsItemList.appendChild(itemDiv);
+        itemList.appendChild(itemDiv);
         itemDiv.style.position = "relative";
         itemDiv.style.top = "20px";
         itemDiv.addEventListener("click", deleteItem);
         itemDiv.addEventListener("click", checkItem);
-        //itemDiv.addEventListener("click", editItem);
         // Checkbox
         let itemCheck = document.createElement("input");
         itemCheck.setAttribute("type", "checkbox");
@@ -81,6 +80,7 @@ var L05_Einkaufsliste;
         itemComment.value = inputComment.value;
         itemDiv.appendChild(itemComment);
         inputComment.value = "";
+        sendDataToServer();
     }
     function checkItem(_event) {
         console.log("Check Item");
@@ -111,25 +111,17 @@ var L05_Einkaufsliste;
         }
     }
     L05_Einkaufsliste.deleteItem = deleteItem;
-    /*
-        export function editItem(_event: MouseEvent): void {
-            console.log("Edit Item");
-    
-            let target: HTMLElement = <HTMLElement>_event.target;
-            let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
-    
-            if (target.classList.contains("editButton") || target.classList.contains("pen")) {
-                
-                let inputName: HTMLInputElement = <HTMLInputElement>document.querySelector("#newItem");
-                let inputAmount: HTMLInputElement = <HTMLInputElement>document.querySelector("#newAmount");
-                let inputComment: HTMLTextAreaElement = <HTMLTextAreaElement>document.querySelector("#newComment");
-    
-                //let nameField: Element = <Element>currentTarget.querySelector(".name");
-                let itemName: HTMLParagraphElement = <HTMLParagraphElement>target.querySelector("p");
-                itemName.innerHTML = inputName.value;
-    
-    
-            }
-        }*/
+    async function sendDataToServer() {
+        console.log("Send To Server");
+        let formData = new FormData(document.forms[0]);
+        let url = "https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/einkaufsliste.html";
+        let query = new URLSearchParams(formData);
+        await fetch(url + "?" + query.toString());
+        let response = await fetch(url + "?" + query.toString());
+        let responseText = await response.text();
+        console.log("Response: " + response);
+        console.log("Response Text: " + responseText);
+        alert("New Item Added");
+    }
 })(L05_Einkaufsliste || (L05_Einkaufsliste = {}));
 //# sourceMappingURL=script.js.map
