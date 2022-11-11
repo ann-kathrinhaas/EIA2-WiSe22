@@ -3,7 +3,7 @@
 Aufgabe: L05 Einkaufsliste Client
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: 11.11.22
+Datum: 12.11.22
 Quellen: -
 */
 var L05_Einkaufsliste;
@@ -99,7 +99,6 @@ var L05_Einkaufsliste;
             console.log(dateField);
             dateField.innerHTML = checkDate;
         }
-        sendDataToServer();
     }
     L05_Einkaufsliste.checkItem = checkItem;
     function deleteItem(_event) {
@@ -110,19 +109,14 @@ var L05_Einkaufsliste;
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
-        sendDataToServer();
     }
     L05_Einkaufsliste.deleteItem = deleteItem;
     async function sendDataToServer() {
         console.log("Send To Server");
         let formData = new FormData(document.forms[0]);
-        let url = "https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/einkaufsliste.html";
+        let url = "einkaufsliste.html";
         let query = new URLSearchParams(formData);
         await fetch(url + "?" + query.toString());
-        let response = await fetch(url + "?" + query.toString());
-        let responseText = await response.text();
-        console.log("Response: " + response);
-        console.log("Response Text: " + responseText);
         alert("Data Sent");
     }
 })(L05_Einkaufsliste || (L05_Einkaufsliste = {}));

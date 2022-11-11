@@ -2,7 +2,7 @@
 Aufgabe: L05 Einkaufsliste Client
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: 11.11.22
+Datum: 12.11.22
 Quellen: -
 */
 
@@ -123,9 +123,6 @@ namespace L05_Einkaufsliste {
             console.log(dateField);
             dateField.innerHTML = checkDate;
         }
-
-        sendDataToServer();
-
     }
 
     export function deleteItem(_event: MouseEvent): void {
@@ -138,24 +135,15 @@ namespace L05_Einkaufsliste {
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
-
-        sendDataToServer();
-        
     }
 
     async function sendDataToServer(): Promise<void> {
         console.log("Send To Server");
 
         let formData: FormData = new FormData(document.forms[0]);
-        let url: string = "https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/einkaufsliste.html";
-
+        let url: string = "einkaufsliste.html";
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         await fetch(url + "?" + query.toString());
-
-        let response: Response = await fetch(url + "?" + query.toString());
-        let responseText: string = await response.text();
-        console.log("Response: " + response);
-        console.log("Response Text: " + responseText);
 
         alert("Data Sent");
     }
