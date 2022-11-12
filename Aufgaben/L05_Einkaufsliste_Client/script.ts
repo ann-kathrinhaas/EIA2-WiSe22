@@ -123,6 +123,9 @@ namespace L05_Einkaufsliste {
             console.log(dateField);
             dateField.innerHTML = checkDate;
         }
+
+        sendDataToServer();
+
     }
 
     export function deleteItem(_event: MouseEvent): void {
@@ -135,10 +138,13 @@ namespace L05_Einkaufsliste {
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
+
+        sendDataToServer();
+    
     }
 
     async function sendDataToServer(): Promise<void> {
-        console.log("Send To Server");
+        console.log("Send Data To Server");
 
         let formData: FormData = new FormData(document.forms[0]);
         let url: string = "einkaufsliste.html";

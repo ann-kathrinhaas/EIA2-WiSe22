@@ -99,6 +99,7 @@ var L05_Einkaufsliste;
             console.log(dateField);
             dateField.innerHTML = checkDate;
         }
+        sendDataToServer();
     }
     L05_Einkaufsliste.checkItem = checkItem;
     function deleteItem(_event) {
@@ -109,10 +110,11 @@ var L05_Einkaufsliste;
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
+        sendDataToServer();
     }
     L05_Einkaufsliste.deleteItem = deleteItem;
     async function sendDataToServer() {
-        console.log("Send To Server");
+        console.log("Send Data To Server");
         let formData = new FormData(document.forms[0]);
         let url = "einkaufsliste.html";
         let query = new URLSearchParams(formData);
