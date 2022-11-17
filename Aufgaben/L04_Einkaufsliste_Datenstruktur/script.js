@@ -29,6 +29,7 @@ var L04_Einkaufsliste;
         itemDiv.style.top = "20px";
         itemDiv.addEventListener("click", deleteItem);
         itemDiv.addEventListener("click", checkItem);
+        //itemDiv.addEventListener("click", editItem);
         // Checkbox
         let itemCheck = document.createElement("input");
         itemCheck.setAttribute("type", "checkbox");
@@ -107,5 +108,25 @@ var L04_Einkaufsliste;
         }
     }
     L04_Einkaufsliste.deleteItem = deleteItem;
+    /*
+        export function editItem(_event: MouseEvent): void {
+            console.log("Edit Item");
+    
+            let target: HTMLElement = <HTMLElement>_event.target;
+            let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+    
+            if (target.classList.contains("editButton") || target.classList.contains("pen")) {
+                
+                let inputName: HTMLInputElement = <HTMLInputElement>document.querySelector("#newItem");
+                let inputAmount: HTMLInputElement = <HTMLInputElement>document.querySelector("#newAmount");
+                let inputComment: HTMLTextAreaElement = <HTMLTextAreaElement>document.querySelector("#newComment");
+    
+                //let nameField: Element = <Element>currentTarget.querySelector(".name");
+                let itemName: HTMLParagraphElement = <HTMLParagraphElement>target.querySelector("p");
+                itemName.innerHTML = inputName.value;
+    
+    
+            }
+        }*/
 })(L04_Einkaufsliste || (L04_Einkaufsliste = {}));
 //# sourceMappingURL=script.js.map

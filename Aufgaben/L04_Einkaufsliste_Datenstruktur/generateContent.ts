@@ -14,6 +14,7 @@ namespace L04_Einkaufsliste {
             fsItemList.appendChild(itemDiv);
             itemDiv.addEventListener("click", deleteItem);
             itemDiv.addEventListener("click", checkItem);
+            //itemDiv.addEventListener("click", editItem);
 
             // Checkbox
             let itemCheck: HTMLInputElement = document.createElement("input");

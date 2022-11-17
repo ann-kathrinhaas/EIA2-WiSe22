@@ -11,6 +11,7 @@ var L04_Einkaufsliste;
             fsItemList.appendChild(itemDiv);
             itemDiv.addEventListener("click", L04_Einkaufsliste.deleteItem);
             itemDiv.addEventListener("click", L04_Einkaufsliste.checkItem);
+            //itemDiv.addEventListener("click", editItem);
             // Checkbox
             let itemCheck = document.createElement("input");
             itemCheck.setAttribute("type", "checkbox");

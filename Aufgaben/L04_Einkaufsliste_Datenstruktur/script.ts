@@ -38,6 +38,7 @@ namespace L04_Einkaufsliste {
         itemDiv.style.top = "20px";
         itemDiv.addEventListener("click", deleteItem);
         itemDiv.addEventListener("click", checkItem);
+        //itemDiv.addEventListener("click", editItem);
 
         // Checkbox
         let itemCheck: HTMLInputElement = document.createElement("input");
@@ -132,6 +133,25 @@ namespace L04_Einkaufsliste {
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
-
     }
+/*
+    export function editItem(_event: MouseEvent): void {
+        console.log("Edit Item");
+
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+
+        if (target.classList.contains("editButton") || target.classList.contains("pen")) {
+            
+            let inputName: HTMLInputElement = <HTMLInputElement>document.querySelector("#newItem");
+            let inputAmount: HTMLInputElement = <HTMLInputElement>document.querySelector("#newAmount");
+            let inputComment: HTMLTextAreaElement = <HTMLTextAreaElement>document.querySelector("#newComment");
+
+            //let nameField: Element = <Element>currentTarget.querySelector(".name");
+            let itemName: HTMLParagraphElement = <HTMLParagraphElement>target.querySelector("p");
+            itemName.innerHTML = inputName.value;
+
+
+        }
+    }*/
 }
