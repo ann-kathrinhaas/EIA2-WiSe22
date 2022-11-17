@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 350px;
+    height: 667px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #D6DFF3;
+}
+
+h1 {
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+fieldset {
+    border-width: 0;
+}
+
+#fsNewItem {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+legend {
+    text-align: center;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 25px;
+}
+
+#newItem {
+    width: 190px;
+    height: 10px;
+    position: relative;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: rgb(97, 95, 95);
+    border: 1px solid rgb(128, 166, 201);
+}
+
+#newComment {
+    width: 280px;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: rgb(97, 95, 95);
+    border: 1px solid rgb(128, 166, 201);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#newAmount {
+    width: 30px;
+    height: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    color: rgb(97, 95, 95);
+    border: 1px solid rgb(128, 166, 201);
+}
+
+#addButton {
+    border-width: 0;
+    background: none;
+    color: #7a7a7a;
+    font-size: 25px;
+    position: relative;
+    top: 5px;
+    right: 5px;
+}
+
+#addButton:hover {
+    cursor: pointer;
+}
+
+.itemInfo {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"], label, .amount{
+    display: inline;
+    margin-bottom: 15px;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.name {
+    position: relative;
+    left: 5px;
+    display: inline-block;
+}
+
+.amount::after {
+    content:"";
+    display: block;
+}
+
+.amount {
+    margin-left: 100px;
+}
+
+.inputCheck {
+    border: 1px solid rgb(128, 166, 201);
+}
+
+.date {
+    width: 70px;
+    display: block;
+    margin-left: 25px;
+    margin-bottom: 5px;
+    border: 1px solid rgb(128, 166, 201);
+    background-color: white;
+    color: grey;
+    font-size: smaller;
+    padding-left: 2px;
+}
+
+.comment {
+    display: block;
+    width: 250px;
+    margin-left: 25px;
+    border: 1px solid rgb(128, 166, 201);
+}
+
+.deleteButton {
+    border-width: 0;
+    background: none;
+    color: #7a7a7a;
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+}
+
+.editButton {
+    border-width: 0;
+    background: none;
+    color: #7a7a7a;
+    position: absolute;
+    top: 0px;
+    right: 40px;
+}
+
+.editButton:hover {
+    cursor: pointer;
+}
