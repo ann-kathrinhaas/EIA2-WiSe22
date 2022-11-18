@@ -3,7 +3,7 @@
 Aufgabe: L06 Einkaufsliste Database Server
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: 17.11.22
+Datum: 19.11.22
 Quellen: -
 */
 var L06_Einkaufsliste;
