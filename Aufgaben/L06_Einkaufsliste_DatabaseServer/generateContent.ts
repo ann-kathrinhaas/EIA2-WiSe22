@@ -12,11 +12,21 @@ namespace L06_Einkaufsliste {
         [entry: string]: Item[];
     }
 
-    export function generateContent(_data: Data): void {
+    export async function generateContent(_data: Data): Promise<void> {
 
         let itemList: HTMLElement = <HTMLFormElement>document.querySelector("#itemList");
         
         console.log("Entry");
+
+        let url: string = "https://webuser.hs-furtwangen.de/~haasannk/Database/";
+
+        let query: URLSearchParams = new URLSearchParams();
+        query.set("command", "find");
+        query.set("collection", "ShoppingList");
+
+        let response: Response = await fetch(url + "?" + query.toString);
+        let responseText: string = await response.text();
+        
 
         for (let i: number = 0; i < _data.Entry.length; i++) {
             

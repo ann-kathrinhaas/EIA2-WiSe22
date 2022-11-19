@@ -10,14 +10,30 @@ namespace L06_Einkaufsliste {
 
     window.addEventListener("load", handleLoad);
 
+    let url: string = "https://webuser.hs-furtwangen.de/~haasannk/Database/";
+
     async function handleLoad(): Promise<void> {
         console.log("Init");
+        
+        let query: URLSearchParams = new URLSearchParams();
+        query.set("command", "show");
+        query.set("collection", "ShoppingList");
 
-        let response: Response = await fetch("https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/data.json");
-        let content: string = await response.text();
-        let data: Data = JSON.parse(content);
 
-        generateContent(data); // erstellt Beispieleinträge mit Inhalten aus data.json
+        let response: Response = await fetch(url + "?" + query.toString);
+        let responseText: string = await response.text();
+
+        /*
+        if (responseText == '{"status":"success", "data:[ShoppingList]}') { // Erfolgsbestätigung von MingiDB -> Collection ShoppingList existiert
+            generateContent(); // Beispieleinträge werden erstellt
+        }
+        else { // Collection ShoppingList existiert nicht -> wird erstellt
+            let query: URLSearchParams = new URLSearchParams();
+            query.set("command", "create");
+            query.set("collection", "ShoppingList");
+        }
+        */
+
 
         let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addButton");
         addButton.addEventListener("click", addItem);
@@ -49,7 +65,7 @@ namespace L06_Einkaufsliste {
         itemDiv.appendChild(itemCheck);
 
         // Name
-        let itemName: HTMLParagraphElement = <HTMLParagraphElement>document.createElement("p");
+        let itemName: HTMLElement = document.createElement("p");
         itemName.classList.add("name");
         itemName.innerHTML = inputName.value;
         itemDiv.appendChild(itemName);
@@ -97,7 +113,7 @@ namespace L06_Einkaufsliste {
         itemDiv.appendChild(itemComment);
         inputComment.value = "";
 
-        sendDataToServer();
+        //sendDataToServer(itemName, itemAmount, itemComment, itemDate, itemCheck);
 
     }
 
@@ -124,7 +140,7 @@ namespace L06_Einkaufsliste {
             dateField.innerHTML = checkDate;
         }
 
-        sendDataToServer();
+        //sendDataToServer();
 
     }
 
@@ -139,18 +155,26 @@ namespace L06_Einkaufsliste {
             parentElement.removeChild(currentTarget);
         }
 
-        sendDataToServer();
+        //sendDataToServer();
+
+        
     
     }
 
-    async function sendDataToServer(): Promise<void> {
+    async function sendDataToServer(_name: string, _amount: number, _comment: string, _date: string, _checked: boolean): Promise<void> {
         console.log("Send Data To Server");
 
-        let formData: FormData = new FormData(document.forms[0]);
-        let url: string = "einkaufsliste.html";
-        let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch(url + "?" + query.toString());
+        let query: URLSearchParams = new URLSearchParams();
+        query.set("command", "insert");
+        query.set("collection", "ShoppingList");
 
-        alert("Data Sent");
+        query.set("data", '{"name":"' + _name + '","amount":' + _amount + ',"comment":"' + _comment + ',"date":"' + _date + ',"checked":"' + _checked);
+        console.log(query.toString());
+        let response: Response = await fetch (url + "?" + query.toString());
+        let responseText: string = await response.text();
+        console.log(responseText);
+
+        alert(responseText);
+        //alert("Data Sent");
     }
 }

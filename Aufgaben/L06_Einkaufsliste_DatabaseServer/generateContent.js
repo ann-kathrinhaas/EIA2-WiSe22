@@ -1,9 +1,15 @@
 "use strict";
 var L06_Einkaufsliste;
 (function (L06_Einkaufsliste) {
-    function generateContent(_data) {
+    async function generateContent(_data) {
         let itemList = document.querySelector("#itemList");
         console.log("Entry");
+        let url = "https://webuser.hs-furtwangen.de/~haasannk/Database/";
+        let query = new URLSearchParams();
+        query.set("command", "find");
+        query.set("collection", "ShoppingList");
+        let response = await fetch(url + "?" + query.toString);
+        let responseText = await response.text();
         for (let i = 0; i < _data.Entry.length; i++) {
             // Div für Item Infos
             let itemDiv = document.createElement("div");
