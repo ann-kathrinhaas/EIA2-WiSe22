@@ -9,24 +9,12 @@ Quellen: -
 var L06_Einkaufsliste;
 (function (L06_Einkaufsliste) {
     window.addEventListener("load", handleLoad);
-    let url = "https://webuser.hs-furtwangen.de/~haasannk/Database/";
     async function handleLoad() {
         console.log("Init");
-        let query = new URLSearchParams();
-        query.set("command", "show");
-        query.set("collection", "ShoppingList");
-        let response = await fetch(url + "?" + query.toString);
-        let responseText = await response.text();
-        /*
-        if (responseText == '{"status":"success", "data:[ShoppingList]}') { // Erfolgsbestätigung von MingiDB -> Collection ShoppingList existiert
-            generateContent(); // Beispieleinträge werden erstellt
-        }
-        else { // Collection ShoppingList existiert nicht -> wird erstellt
-            let query: URLSearchParams = new URLSearchParams();
-            query.set("command", "create");
-            query.set("collection", "ShoppingList");
-        }
-        */
+        let response = await fetch("https://ann-kathrinhaas.github.io/EIA2-WiSe22/Aufgaben/L05_Einkaufsliste_Client/data.json");
+        let content = await response.text();
+        let data = JSON.parse(content);
+        L06_Einkaufsliste.generateContent(data); // erstellt Beispieleinträge mit Inhalten aus data.json
         let addButton = document.querySelector("#addButton");
         addButton.addEventListener("click", addItem);
     }
@@ -92,7 +80,7 @@ var L06_Einkaufsliste;
         itemComment.value = inputComment.value;
         itemDiv.appendChild(itemComment);
         inputComment.value = "";
-        //sendDataToServer(itemName, itemAmount, itemComment, itemDate, itemCheck);
+        sendDataToServer();
     }
     function checkItem(_event) {
         console.log("Check Item");
@@ -111,7 +99,7 @@ var L06_Einkaufsliste;
             console.log(dateField);
             dateField.innerHTML = checkDate;
         }
-        //sendDataToServer();
+        sendDataToServer();
     }
     L06_Einkaufsliste.checkItem = checkItem;
     function deleteItem(_event) {
@@ -122,21 +110,16 @@ var L06_Einkaufsliste;
         if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
             parentElement.removeChild(currentTarget);
         }
-        //sendDataToServer();
+        sendDataToServer();
     }
     L06_Einkaufsliste.deleteItem = deleteItem;
-    async function sendDataToServer(_name, _amount, _comment, _date, _checked) {
+    async function sendDataToServer() {
         console.log("Send Data To Server");
-        let query = new URLSearchParams();
-        query.set("command", "insert");
-        query.set("collection", "ShoppingList");
-        query.set("data", '{"name":"' + _name + '","amount":' + _amount + ',"comment":"' + _comment + ',"date":"' + _date + ',"checked":"' + _checked);
-        console.log(query.toString());
-        let response = await fetch(url + "?" + query.toString());
-        let responseText = await response.text();
-        console.log(responseText);
-        alert(responseText);
-        //alert("Data Sent");
+        let formData = new FormData(document.forms[0]);
+        let url = "einkaufsliste.html";
+        let query = new URLSearchParams(formData);
+        await fetch(url + "?" + query.toString());
+        alert("Data Sent");
     }
 })(L06_Einkaufsliste || (L06_Einkaufsliste = {}));
 //# sourceMappingURL=script.js.map
