@@ -9,10 +9,10 @@ Quellen: -
 var L08_GenerativeKunst;
 (function (L08_GenerativeKunst) {
     let crc2;
-    window.addEventListener("load", handleLoad);
-    console.log("Canvas");
     let random = Math.round(Math.random() * 3);
     console.log(random);
+    window.addEventListener("load", handleLoad);
+    console.log("Canvas");
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         crc2 = canvas.getContext("2d");

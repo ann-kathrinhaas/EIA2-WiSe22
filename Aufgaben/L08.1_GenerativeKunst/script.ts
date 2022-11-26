@@ -15,13 +15,12 @@ namespace L08_GenerativeKunst {
 
     let crc2: CanvasRenderingContext2D;
 
-
+    let random: number = Math.round(Math.random() * 3);
+    console.log(random);
+    
     window.addEventListener("load", handleLoad);
 
     console.log("Canvas");
-
-    let random: number = Math.round(Math.random() * 3);
-    console.log(random);
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
