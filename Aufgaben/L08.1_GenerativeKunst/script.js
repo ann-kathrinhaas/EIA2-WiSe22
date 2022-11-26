@@ -8,10 +8,10 @@ Quellen: -
 */
 var L08_GenerativeKunst;
 (function (L08_GenerativeKunst) {
-    let crc2;
-    let random = Math.round(Math.random() * 3);
-    console.log(random);
     window.addEventListener("load", handleLoad);
+    let crc2;
+    let random = Math.round(Math.random() * 2);
+    console.log(random);
     console.log("Canvas");
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
@@ -31,7 +31,7 @@ var L08_GenerativeKunst;
         }
         else if (random == 3) {
             drawCircles({ x: canvas.width, y: canvas.height });
-            //drawLines({ x: canvas.width, y: canvas.height });
+            drawLines({ x: canvas.width, y: canvas.height });
         }
     }
     function drawBackground() {

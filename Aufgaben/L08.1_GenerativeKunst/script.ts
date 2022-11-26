@@ -13,12 +13,12 @@ namespace L08_GenerativeKunst {
         y: number;
     }
 
+    window.addEventListener("load", handleLoad);
+
     let crc2: CanvasRenderingContext2D;
 
-    let random: number = Math.round(Math.random() * 3);
+    let random: number = Math.round(Math.random() * 2);
     console.log(random);
-    
-    window.addEventListener("load", handleLoad);
 
     console.log("Canvas");
 
@@ -41,7 +41,7 @@ namespace L08_GenerativeKunst {
             drawLines({ x: canvas.width, y: canvas.height });
         } else if (random == 3) {
             drawCircles({ x: canvas.width, y: canvas.height });
-            //drawLines({ x: canvas.width, y: canvas.height });
+            drawLines({ x: canvas.width, y: canvas.height });
         }
     }
 
