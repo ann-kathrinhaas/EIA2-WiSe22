@@ -32,9 +32,9 @@ namespace L08_GenerativeKunst {
         drawBackground();
 
         if (random == 0 || random == 1) {
+            drawTriangles({ x: canvas.width, y: canvas.height });
             drawCircles({ x: canvas.width, y: canvas.height });
             drawRects({ x: canvas.width, y: canvas.height });
-            drawTriangles({ x: canvas.width, y: canvas.height });
             drawEllipses({ x: canvas.width, y: canvas.height });
         } else if (random == 2) {
             drawCircles({ x: canvas.width, y: canvas.height });
