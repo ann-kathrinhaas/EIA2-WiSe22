@@ -17,7 +17,7 @@ namespace L08_GenerativeKunst {
 
     let crc2: CanvasRenderingContext2D;
 
-    let random: number = Math.round(Math.random() * 2);
+    let random: number = Math.round(Math.random() * 3);
     console.log(random);
 
     console.log("Canvas");
