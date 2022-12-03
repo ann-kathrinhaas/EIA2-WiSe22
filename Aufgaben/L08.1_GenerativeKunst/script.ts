@@ -30,7 +30,6 @@ namespace L08_GenerativeKunst {
         canvas.height = window.innerHeight;
 
         drawBackground();
-
         if (random == 0 || random == 1) {
             drawTriangles({ x: canvas.width, y: canvas.height });
             drawCircles({ x: canvas.width, y: canvas.height });

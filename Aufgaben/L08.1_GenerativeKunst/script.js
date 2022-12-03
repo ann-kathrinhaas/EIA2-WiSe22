@@ -10,7 +10,7 @@ var L08_GenerativeKunst;
 (function (L08_GenerativeKunst) {
     window.addEventListener("load", handleLoad);
     let crc2;
-    let random = Math.round(Math.random() * 2);
+    let random = Math.round(Math.random() * 3);
     console.log(random);
     console.log("Canvas");
     function handleLoad(_event) {
@@ -20,9 +20,9 @@ var L08_GenerativeKunst;
         canvas.height = window.innerHeight;
         drawBackground();
         if (random == 0 || random == 1) {
+            drawTriangles({ x: canvas.width, y: canvas.height });
             drawCircles({ x: canvas.width, y: canvas.height });
             drawRects({ x: canvas.width, y: canvas.height });
-            drawTriangles({ x: canvas.width, y: canvas.height });
             drawEllipses({ x: canvas.width, y: canvas.height });
         }
         else if (random == 2) {
