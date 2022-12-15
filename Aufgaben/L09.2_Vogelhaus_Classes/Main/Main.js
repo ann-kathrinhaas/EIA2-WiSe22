@@ -38,7 +38,6 @@ var L09_Vogelhaus;
         drawBirdHouse({ x: 650, y: 300 });
         getImageData = L09_Vogelhaus.crc2.getImageData(0, 0, canvas.width, canvas.height);
         drawBirds();
-        //drawSnowflakes();
     }
     function drawArcHeading(_x, _y, _radius, _startAngle, _endAngle, _color) {
         crc2Heading.beginPath();

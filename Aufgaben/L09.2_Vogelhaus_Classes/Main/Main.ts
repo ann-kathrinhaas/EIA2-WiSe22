@@ -55,7 +55,7 @@ namespace L09_Vogelhaus {
         getImageData = crc2.getImageData(0, 0, canvas.width, canvas.height);
 
         drawBirds();
-        //drawSnowflakes();
+        
 
     }
 

@@ -7,7 +7,6 @@ namespace L09_Vogelhaus {
         x: number = Math.round(Math.random() * innerWidth);
         y: number = Math.round(Math.random() * innerHeight);
         velocity: Vector;
-        
 
         constructor() {
             this.gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");

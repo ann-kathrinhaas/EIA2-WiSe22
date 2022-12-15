@@ -24,6 +24,7 @@ var L09_Vogelhaus;
             L09_Vogelhaus.crc2.restore();
         }
         move(_timeslice) {
+            console.log("move");
         }
     }
     L09_Vogelhaus.Snowflake = Snowflake;
