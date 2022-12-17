@@ -70,37 +70,37 @@ namespace L09_Vogelhaus_Classes {
         crc2.putImageData(background, 0, 0);
 
         for (let snowflake of snowflakes) {
-            snowflake.move(1 / 50); 
+            snowflake.move(); 
             snowflake.draw();
         }
 
         for (let flyingBirdRight of flyingBirdsRight) {
-            flyingBirdRight.move(1 / 50); 
+            flyingBirdRight.move(); 
             flyingBirdRight.draw();
         }
 
         for (let flyingBirdLeft of flyingBirdsLeft) {
-            flyingBirdLeft.move(1 / 50);
+            flyingBirdLeft.move();
             flyingBirdLeft.draw();
         }
 
         for (let bird1Right of birds1Right) {
-            bird1Right.move(1 / 50);
+            bird1Right.move();
             bird1Right.draw();
         }
 
         for (let bird1Left of birds1Left) {
-            bird1Left.move(1 / 50);
+            bird1Left.move();
             bird1Left.draw();
         }
 
         for (let bird2Right of birds2Right) {
-            bird2Right.move(1 / 50);
+            bird2Right.move();
             bird2Right.draw();
         }
 
         for (let bird2Left of birds2Left) {
-            bird2Left.move(1 / 50);
+            bird2Left.move();
             bird2Left.draw();
         }
     }

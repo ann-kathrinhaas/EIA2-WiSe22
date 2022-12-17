@@ -22,7 +22,7 @@ var L09_Vogelhaus_Classes;
             L09_Vogelhaus_Classes.crc2.closePath();
             L09_Vogelhaus_Classes.crc2.restore();
         }
-        move(_timeslice) {
+        move() {
             this.position.y += this.velocity;
             this.position.x += this.velocity;
             if (this.position.y > L09_Vogelhaus_Classes.crc2.canvas.height)

@@ -62,7 +62,7 @@ namespace L09_Vogelhaus_Classes {
             crc2.restore();
         }
 
-        move(_timeslice: number): void {
+        move(): void {
             this.position.x -= this.velocity;
          
             if (this.position.x < 0)

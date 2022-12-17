@@ -57,7 +57,7 @@ var L09_Vogelhaus_Classes;
             this.drawTriangle(20, -15, 20, -9, 28, -12, "HSL(27, 82%, 51%)"); // Schnabel
             L09_Vogelhaus_Classes.crc2.restore();
         }
-        move(_timeslice) {
+        move() {
             this.position.x += this.velocity;
             if (this.position.x > L09_Vogelhaus_Classes.crc2.canvas.width)
                 this.position.x -= L09_Vogelhaus_Classes.crc2.canvas.width;
