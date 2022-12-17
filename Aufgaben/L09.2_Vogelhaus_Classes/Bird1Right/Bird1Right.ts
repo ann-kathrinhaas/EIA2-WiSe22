@@ -1,13 +1,11 @@
-namespace L09_Vogelhaus {
+namespace L09_Vogelhaus_Classes {
     export class Bird1Right {
-
-        position: Vector = new Vector2(Math.round((Math.random() * 500) + 220), Math.round(Math.random() * 500) + 450);
-        x: number = Math.round((Math.random() * 500) + 220);
-        y: number = Math.round((Math.random() * 500) + 450);
+        position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
         randomColor: number = Math.round(Math.random() * 2);
         colorWing: string;
         colorBody: string;
         colorHead: string;
+        velocity: number = Math.random() * 2;
 
         constructor() {   
             switch (this.randomColor) {
@@ -106,8 +104,11 @@ namespace L09_Vogelhaus {
             crc2.restore();
         }
 
-        move(): void {
-            console.log("move");
+        move(_timeslice: number): void {
+            this.position.x += this.velocity;
+
+            if (this.position.x > crc2.canvas.width)
+                this.position.x -= crc2.canvas.width;
         }
     }
 }

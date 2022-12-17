@@ -1,12 +1,11 @@
-namespace L09_Vogelhaus {
+namespace L09_Vogelhaus_Classes {
     export class FlyingBirdLeft {
-        position: Vector = new Vector2(Math.round((Math.random() * 500) + 220), Math.round(Math.random() * 500) + 450);
-        x: number = Math.round((Math.random() * 700) + 50);
-        y: number = Math.round((Math.random() * 200) + 50);
+        position: Vector2 = new Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
         randomColor: number = Math.round(Math.random() * 2);
         colorWing: string;
         colorBody: string;
         colorHead: string;
+        velocity: number = (Math.random() * 4) + 1.5;
 
         constructor() {
             switch (this.randomColor) {
@@ -63,8 +62,12 @@ namespace L09_Vogelhaus {
             crc2.restore();
         }
 
-        move(): void {
-            console.log("move");
+        move(_timeslice: number): void {
+            this.position.x -= this.velocity;
+         
+            if (this.position.x < 0)
+                this.position.x += crc2.canvas.width;
+
         }
     }
 }

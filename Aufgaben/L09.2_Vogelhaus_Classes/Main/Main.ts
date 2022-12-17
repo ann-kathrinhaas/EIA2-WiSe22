@@ -2,13 +2,13 @@
 Aufgabe: L09.2 Vogelhaus Classes
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: 15.12.22
+Datum: 17.12.22
 Quellen: -
 */
 
-namespace L09_Vogelhaus {
+namespace L09_Vogelhaus_Classes {
 
-    export interface Vector {
+    interface Vector {
         x: number;
         y: number;
     }
@@ -19,11 +19,16 @@ namespace L09_Vogelhaus {
     let crc2Heading: CanvasRenderingContext2D;
 
     let golden: number = 0.62; // Goldener Schnitt
-    console.log(golden);
 
-    //let getImageData: ImageData;
+    let background: ImageData;
 
-    //let snowflakes: Snowflake[] = [];
+    let snowflakes: Snowflake[] = [];
+    let flyingBirdsRight: FylingBirdRight[] = [];
+    let flyingBirdsLeft: FlyingBirdLeft[] = [];
+    let birds1Right: Bird1Right[] = [];
+    let birds1Left: Bird1Left[] = [];
+    let birds2Right: Bird2Right[] = [];
+    let birds2Left: Bird2Left[] = [];
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
@@ -51,13 +56,120 @@ namespace L09_Vogelhaus {
         drawSnowman({ x: 100, y: 550 });
         drawChristmasTree({ x: 400, y: 460 });
         drawBirdHouse({ x: 650, y: 300 });
-
-        //getImageData = crc2.getImageData(0, 0, canvas.width, canvas.height);
-
-        //drawSnowflake();
         drawBirds();
-        
 
+        background = crc2.getImageData(0, 0, canvas.width, canvas.height);
+
+        drawBirdsAnimated();
+        drawSnowflakes();
+        
+        window.setInterval(update, 20);
+    }
+
+    function update(): void {
+        crc2.putImageData(background, 0, 0);
+
+        for (let snowflake of snowflakes) {
+            snowflake.move(1 / 50); 
+            snowflake.draw();
+        }
+
+        for (let flyingBirdRight of flyingBirdsRight) {
+            flyingBirdRight.move(1 / 50); 
+            flyingBirdRight.draw();
+        }
+
+        for (let flyingBirdLeft of flyingBirdsLeft) {
+            flyingBirdLeft.move(1 / 50);
+            flyingBirdLeft.draw();
+        }
+
+        for (let bird1Right of birds1Right) {
+            bird1Right.move(1 / 50);
+            bird1Right.draw();
+        }
+
+        for (let bird1Left of birds1Left) {
+            bird1Left.move(1 / 50);
+            bird1Left.draw();
+        }
+
+        for (let bird2Right of birds2Right) {
+            bird2Right.move(1 / 50);
+            bird2Right.draw();
+        }
+
+        for (let bird2Left of birds2Left) {
+            bird2Left.move(1 / 50);
+            bird2Left.draw();
+        }
+    }
+
+    function drawSnowflakes(): void {
+        console.log("Snowflakes");
+
+        let nSnowflakes: number = (Math.round(Math.random() * 200) + 100);
+
+        for (let drawn: number = 0; drawn < nSnowflakes; drawn++) {
+            snowflakes.push(new Snowflake());
+        }
+    }
+
+    function drawBirdsAnimated(): void {
+        let nFlyingBirdsRight: number = (Math.round(Math.random() * 7));
+        let nFlyingBirdsLeft: number = (Math.round(Math.random() * 7));
+        let random: number = Math.round(Math.random() * 1);
+
+        if (nFlyingBirdsRight >= 4 && nFlyingBirdsLeft >= 4) {
+            switch (random) {
+                case 0:
+                    nFlyingBirdsRight -= 3;
+                    break;
+                case 1:
+                    nFlyingBirdsLeft -= 3;
+                    break;
+            }
+        }
+
+        if (nFlyingBirdsRight <= 2 || nFlyingBirdsLeft <= 2) {
+            switch (random) {
+                case 0:
+                    nFlyingBirdsRight += 2;
+                    break;
+                case 1:
+                    nFlyingBirdsLeft += 2;
+                    break;
+            }
+        }
+
+        for (let drawn: number = 0; drawn < nFlyingBirdsRight; drawn++) {
+            flyingBirdsRight.push(new FylingBirdRight());
+        }
+
+        for (let drawn: number = 0; drawn < nFlyingBirdsLeft; drawn++) {
+            flyingBirdsLeft.push(new FlyingBirdLeft());
+        }
+
+        let nStandingBirds1Right: number = Math.round((Math.random() * 5) + 3);
+        let nStandingBirds1Left: number = Math.round((Math.random() * 5) + 3);
+        let nStandingBirds2Right: number = Math.round((Math.random() * 5) + 3);
+        let nStandingBirds2Left: number = Math.round((Math.random() * 5) + 3);
+
+        for (let drawn: number = 0; drawn < nStandingBirds1Right; drawn++) {
+            birds1Right.push(new Bird1Right());
+        }
+
+        for (let drawn: number = 0; drawn < nStandingBirds1Left; drawn++) {
+            birds1Left.push(new Bird1Left());
+        }
+
+        for (let drawn: number = 0; drawn < nStandingBirds2Right; drawn++) {
+            birds2Right.push(new Bird2Right());
+        }
+
+        for (let drawn: number = 0; drawn < nStandingBirds2Left; drawn++) {
+            birds2Left.push(new Bird2Left());
+        }
     }
 
     function drawArcHeading(_x: number, _y: number, _radius: number, _startAngle: number, _endAngle: number, _color: string): void {
@@ -415,12 +527,6 @@ namespace L09_Vogelhaus {
         crc2.fill();
 
         // Stern
-        /*
-        drawTriangle(7.5, -170, 15, -190, 22.5, -170, "yellow"); // oben
-        drawTriangle(7.5, -170, 15, -150, 22.5, -170, "yellow"); // unten
-        drawTriangle(15, -175, 15, -165, -7.5, -170, "yellow"); // links
-        drawTriangle(15, -175, 15, -165, 35, -170, "yellow"); // rechts */
-
         drawTriangle(7.5, -170, 15, -190, 22.5, -170, "yellow"); // oben
         drawTriangle(7.5, -170, 0, -155, 22.5, -170, "yellow"); // unten links
         drawTriangle(7.5, -170, 30, -155, 22.5, -170, "yellow"); // unten rechts
@@ -519,7 +625,6 @@ namespace L09_Vogelhaus {
         crc2.closePath();
     }
 
-    /*
     function drawBird1Right(_position: Vector, _colorBody: string, _colorHead: string, _colorWing: string): void { // Vogel1 schaut nach rechts
         crc2.save();
         crc2.translate(_position.x, _position.y);
@@ -535,7 +640,7 @@ namespace L09_Vogelhaus {
         drawTriangle(20, -15, 20, -9, 28, -12, "HSL(27, 82%, 51%)"); // Schnabel
 
         crc2.restore();
-    } */
+    }
 
     function drawBird1Left(_position: Vector, _colorBody: string, _colorHead: string, _colorWing: string): void { // Vogel1 schaut nach links
         crc2.save();
@@ -586,231 +691,11 @@ namespace L09_Vogelhaus {
         crc2.restore();
     }
 
-    /*
-    function drawFlyingBirdRight(_position: Vector, _colorBody: string, _colorHead: string, _colorWing: string): void { // fliegender Vogel schaut nach rechts
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-
-        drawArc(0, 0, 11, 0, 2 * Math.PI, _colorBody); // Körper
-        drawTriangle(-10, 5, -18, -8, 4, -12, _colorBody); // Körper
-        drawTriangle(-10, -10, -10, -20, 2, -8, _colorWing); // Flügel
-        drawArc(-4, -7, 6, 0, 2 * Math.PI, _colorWing); // Flügel
-        drawArc(12, -12, 9, 0, 2 * Math.PI, _colorHead); // Kopf
-        drawArc(14, -14, 2.5, 0, 2 * Math.PI, "white"); // Auge
-        drawArc(14, -14, 1, 0, 2 * Math.PI, "black"); // Auge
-        drawTriangle(20, -15, 20, -9, 28, -12, "HSL(27, 82%, 51%)"); // Schnabel
-
-        crc2.restore();
-    }*/
-
-    /*
-    function drawFlyingBirdLeft(_position: Vector, _colorBody: string, _colorHead: string, _colorWing: string): void { // fliegender Vogel schaut nach links
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-
-        drawArc(0, 0, 11, 0, 2 * Math.PI, _colorBody); // Körper
-        drawTriangle(10, 5, 18, -8, -4, -12, _colorBody); // Körper
-        drawTriangle(10, -10, 10, -20, -2, -8, _colorWing); // Flügel
-        drawArc(4, -7, 6, 0, 2 * Math.PI, _colorWing); // Flügel
-        drawArc(-12, -12, 9, 0, 2 * Math.PI, _colorHead); // Kopf
-        drawArc(-14, -14, 2.5, 0, 2 * Math.PI, "white"); // Auge
-        drawArc(-14, -14, 1, 0, 2 * Math.PI, "black"); // Auge
-        drawTriangle(-20, -15, -20, -9, -28, -12, "HSL(27, 82%, 51%)"); // Schnabel
-
-        crc2.restore();
-    }*/
-
-    function drawBirds(): void {
+    function drawBirds(): void { // Vögel im Häuschen
         console.log("Birds");
 
         crc2.save();
-
-        let nFlyingBirdsRight: number = (Math.round(Math.random() * 7));
-        let nFlyingBirdsLeft: number = (Math.round(Math.random() * 7));
-        let random: number = Math.round(Math.random() * 1);
-        console.log(nFlyingBirdsRight);
-        console.log(nFlyingBirdsLeft);
-
-        if (nFlyingBirdsRight >= 4 && nFlyingBirdsLeft >= 4) {
-            switch (random) {
-                case 0:
-                    nFlyingBirdsRight -= 3;
-                    break;
-                case 1:
-                    nFlyingBirdsLeft -= 3;
-                    break;
-            }
-            console.log(nFlyingBirdsRight);
-            console.log(nFlyingBirdsLeft);  
-        }
-
-        if (nFlyingBirdsRight <= 2 || nFlyingBirdsLeft <= 2) {
-            switch (random) {
-                case 0:
-                    nFlyingBirdsRight += 2;
-                    break;
-                case 1:
-                    nFlyingBirdsLeft += 2;
-                    break;
-            }
-            console.log(nFlyingBirdsRight);
-            console.log(nFlyingBirdsLeft);  
-        }
-
-        /*
-        for (let drawn: number = 0; drawn < nFlyingBirdsRight; drawn++) {
-            crc2.save();
-
-            let x: number = Math.round((Math.random() * 700) + 50);
-            let y: number = Math.round((Math.random() * 200) + 50);
-
-            let randomColor: number = Math.round(Math.random() * 2);
-            switch (randomColor) {
-                case 0:
-                    drawFlyingBirdRight({ x: x, y: y}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                    break;
-                case 1:
-                    drawFlyingBirdRight({ x: x, y: y}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                    break;
-                case 2:
-                    drawFlyingBirdRight({ x: x, y: y}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                    break;
-            }
-            
-            crc2.translate(x, y);
-
-            crc2.restore();
-        }*/
-
-        /*
-        for (let drawn: number = 0; drawn < nFlyingBirdsLeft; drawn++) {
-            crc2.save();
-
-            let x: number = Math.round((Math.random() * 700) + 50);
-            let y: number = Math.round((Math.random() * 200) + 50);
-
-            let randomColor: number = Math.round(Math.random() * 2);
-            switch (randomColor) {
-                case 0:
-                    drawFlyingBirdLeft({ x: x, y: y}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                    break;
-                case 1:
-                    drawFlyingBirdLeft({ x: x, y: y}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                    break;
-                case 2:
-                    drawFlyingBirdLeft({ x: x, y: y}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                    break;
-            }
-
-            crc2.translate(x, y);
-
-            crc2.restore();
-        }*/
-
-        //let nStandingBirds1Right: number = Math.round(Math.random() * 5);
-        let nStandingBirds1Left: number = Math.round(Math.random() * 5);
-        let nStandingBirds2Right: number = Math.round(Math.random() * 5);
-        let nStandingBirds2Left: number = Math.round(Math.random() * 5);
-
-        /*
-        for (let drawn: number = 0; drawn < nStandingBirds1Right; drawn++) {
-            crc2.save();
-
-            let x: number = Math.round((Math.random() * 500) + 220);
-            let y: number = Math.round((Math.random() * 500) + 450);
-            
-            let randomColor: number = Math.round(Math.random() * 2);
-            switch (randomColor) {
-                case 0:
-                    drawBird1Right({ x: x, y: y}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                    break;
-                case 1:
-                    drawBird1Right({ x: x, y: y}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                    break;
-                case 2:
-                    drawBird1Right({ x: x, y: y}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                    break;
-            }
-
-            crc2.translate(x, y);
-
-            crc2.restore();
-        } */
-
-        for (let drawn: number = 0; drawn < nStandingBirds1Left; drawn++) {
-            crc2.save();
-
-            let x: number = Math.round((Math.random() * 500) + 220);
-            let y: number = Math.round((Math.random() * 500) + 450);
-            
-            let randomColor: number = Math.round(Math.random() * 2);
-            switch (randomColor) {
-                case 0:
-                    drawBird1Left({ x: x, y: y}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                    break;
-                case 1:
-                    drawBird1Left({ x: x, y: y}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                    break;
-                case 2:
-                    drawBird1Left({ x: x, y: y}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                    break;
-            }
-
-            crc2.translate(x, y);
-
-            crc2.restore();
-        }
-
-        for (let drawn: number = 0; drawn < nStandingBirds2Right; drawn++) {
-            crc2.save();
-
-            let x: number = Math.round((Math.random() * 500) + 220);
-            let y: number = Math.round((Math.random() * 500) + 450);
-            
-            let randomColor: number = Math.round(Math.random() * 2);
-            switch (randomColor) {
-                case 0:
-                    drawBird2Right({ x: x, y: y}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                    break;
-                case 1:
-                    drawBird2Right({ x: x, y: y}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                    break;
-                case 2:
-                    drawBird2Right({ x: x, y: y}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                    break;
-            }
-
-            crc2.translate(x, y);
-
-            crc2.restore();
-        }
-
-        for (let drawn: number = 0; drawn < nStandingBirds2Left; drawn++) {
-            crc2.save();
-
-            let x: number = Math.round((Math.random() * 500) + 220);
-            let y: number = Math.round((Math.random() * 500) + 450);
-
-            let randomColor: number = Math.round(Math.random() * 2);
-            switch (randomColor) {
-                case 0:
-                    drawBird2left({ x: x, y: y}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                    break;
-                case 1:
-                    drawBird2left({ x: x, y: y}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                    break;
-                case 2:
-                    drawBird2left({ x: x, y: y}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                    break;
-            }
-
-            crc2.translate(x, y);
-
-            crc2.restore();
-        }
-
-/*
-        // Vögel im Häuschen
+    
         let random1: number = Math.round(Math.random() * 1);
         let random2: number = Math.round(Math.random() * 1);
 
@@ -821,10 +706,10 @@ namespace L09_Vogelhaus {
         // rechter Vogel
         let x2: number[] = [670, 690];
         let y2: number[] = [440, 455];
-*/
-         /*
-        let randomColor: number = Math.round(Math.random() * 2); 
-           
+
+        
+        let randomColor: number = Math.round(Math.random() * 2);
+            
         switch (random1) {
             case 0:
                 switch (random2) {
@@ -941,16 +826,5 @@ namespace L09_Vogelhaus {
         }
 
         crc2.restore();
-    } */
-/*
-        function drawSnowflakes(): void {
-        console.log("Snowflakes");
-
-        let nSnowflakes: number = (Math.round(Math.random() * 200) + 70);
-
-        for (let drawn: number = 0; drawn < nSnowflakes; drawn++) {
-            snowflakes.push(new Snowflake());
-        }
     }
-    */
-}}
+}

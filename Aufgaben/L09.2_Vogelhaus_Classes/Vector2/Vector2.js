@@ -1,6 +1,6 @@
 "use strict";
-var L09_Vogelhaus;
-(function (L09_Vogelhaus) {
+var L09_Vogelhaus_Classes;
+(function (L09_Vogelhaus_Classes) {
     class Vector2 {
         x;
         y;
@@ -26,6 +26,6 @@ var L09_Vogelhaus;
             this.scale(length);
         }
     }
-    L09_Vogelhaus.Vector2 = Vector2;
-})(L09_Vogelhaus || (L09_Vogelhaus = {}));
+    L09_Vogelhaus_Classes.Vector2 = Vector2;
+})(L09_Vogelhaus_Classes || (L09_Vogelhaus_Classes = {}));
 //# sourceMappingURL=Vector2.js.map

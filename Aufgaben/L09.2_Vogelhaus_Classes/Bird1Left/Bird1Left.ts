@@ -1,24 +1,24 @@
-namespace L09_Vogelhaus {
+namespace L09_Vogelhaus_Classes {
     export class Bird1Left {
-
-        position: Vector = new Vector2(Math.round((Math.random() * 500) + 220), Math.round(Math.random() * 500) + 450);
+        position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
         x: number = Math.round((Math.random() * 500) + 220);
         y: number = Math.round((Math.random() * 500) + 450);
         randomColor: number = Math.round(Math.random() * 2);
         colorWing: string;
         colorBody: string;
         colorHead: string;
+        velocity: number = Math.random() * 2;
 
-        constructor() {
+        constructor() {   
             switch (this.randomColor) {
                 case 0:
                     this.colorWing = "HSL(300, 76%, 72%)";
-                    this.colorBody = "HSL(300, 94%, 65%)";
+                    this.colorBody = "HSL(300, 76%, 72%)";
                     this.colorHead = "HSL(300, 58%, 79%)";
                     break;
                 case 1:
                     this.colorWing = "HSL(120, 67%, 51%)";
-                    this.colorBody = "HSL(120, 91%, 38%)";
+                    this.colorBody = "HSL(120, 91%, 38%)"; 
                     this.colorHead = "HSL(120, 61%, 69%)";
                     break;
                 case 2:
@@ -27,6 +27,7 @@ namespace L09_Vogelhaus {
                     this.colorHead = "HSL(39, 82%, 68%)";
                     break;
             }
+            this.draw();
         }
 
         drawTail(_x1: number, _y1: number, _x2: number, _y2: number, _x3: number, _y3: number, _x4: number, _y4: number, _x5: number, _y5: number, _x6: number, _y6: number, _x7: number, _y7: number, _color: string): void {
@@ -87,25 +88,29 @@ namespace L09_Vogelhaus {
             crc2.closePath();
         }
 
+
         draw(): void {
-        crc2.save();
-        crc2.translate(this.position.x, this.position.y);
+            crc2.save();
+            crc2.translate(this.position.x, this.position.y);
 
-        this.drawTail(13, -3, 20, -8, 18, -3, 20, 0, 18, 3, 20, 8, 13, 3, this.colorWing); // Schwanzfedern
-        this.drawEllipse(0, 0, 15, 10, 0, 0, 2, this.colorBody); // Körper
-        this.drawEllipse(4, -2, 8, 10, 0, 0.5, 1, this.colorWing);  // Flügel
-        this.drawArc(-12, -12, 9, 0, 2 * Math.PI, this.colorHead); // Kopf
-        this.drawArc(-14, -14, 2.5, 0, 2 * Math.PI, "white"); // Auge
-        this.drawArc(-14, -14, 1, 0, 2 * Math.PI, "black"); // Auge
-        this.drawLine(-2, 10, -2, 20, "black", 2, 1); // Fuß links
-        this.drawLine(2, 10, 2, 20, "black", 2, 1); // Fuß rechts
-        this.drawTriangle(-20, -15, -20, -9, -28, -12, "HSL(27, 82%, 51%)"); // Schnabel
+            this.drawTail(13, -3, 20, -8, 18, -3, 20, 0, 18, 3, 20, 8, 13, 3, this.colorWing); // Schwanzfedern
+            this.drawEllipse(0, 0, 15, 10, 0, 0, 2, this.colorBody); // Körper
+            this.drawEllipse(4, -2, 8, 10, 0, 0.5, 1, this.colorWing);  // Flügel
+            this.drawArc(-12, -12, 9, 0, 2 * Math.PI, this.colorHead); // Kopf
+            this.drawArc(-14, -14, 2.5, 0, 2 * Math.PI, "white"); // Auge
+            this.drawArc(-14, -14, 1, 0, 2 * Math.PI, "black"); // Auge
+            this.drawLine(-2, 10, -2, 20, "black", 2, 1); // Fuß links
+            this.drawLine(2, 10, 2, 20, "black", 2, 1); // Fuß rechts
+            this.drawTriangle(-20, -15, -20, -9, -28, -12, "HSL(27, 82%, 51%)"); // Schnabel
 
-        crc2.restore();
+            crc2.restore();
         }
 
-        move(): void {
-            
+        move(_timeslice: number): void {
+            this.position.x -= this.velocity;
+
+            if (this.position.x < 0)
+                this.position.x += crc2.canvas.width;
         }
     }
 }

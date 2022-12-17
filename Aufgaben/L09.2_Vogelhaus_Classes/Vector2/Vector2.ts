@@ -1,4 +1,4 @@
-namespace L09_Vogelhaus {
+namespace L09_Vogelhaus_Classes {
     export class Vector2 {
         x: number;
         y: number;
@@ -17,7 +17,7 @@ namespace L09_Vogelhaus {
             this.y *= _factor;
         }
 
-        add(_addend: Vector): void {
+        add(_addend: Vector2): void {
             this.x += _addend.x;
             this.y += _addend.y;
         }
