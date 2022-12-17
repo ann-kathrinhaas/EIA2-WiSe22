@@ -77,6 +77,9 @@ namespace L09_Vogelhaus_Classes {
             let offset: Vector2 = new Vector2(this.velocity.x, 0);
             offset.scale(_timeslice);
             this.position.add(offset);
+
+            if (this.position.x > crc2.canvas.width) // wenn Vogel nach rechts rausgeht
+                this.position.x -= crc2.canvas.width;
         
         }
     }

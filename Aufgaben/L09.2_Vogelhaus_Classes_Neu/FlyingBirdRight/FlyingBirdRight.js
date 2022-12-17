@@ -70,6 +70,8 @@ var L09_Vogelhaus_Classes;
             let offset = new L09_Vogelhaus_Classes.Vector2(this.velocity.x, 0);
             offset.scale(_timeslice);
             this.position.add(offset);
+            if (this.position.x > L09_Vogelhaus_Classes.crc2.canvas.width) // wenn Vogel nach rechts rausgeht
+                this.position.x -= L09_Vogelhaus_Classes.crc2.canvas.width;
         }
     }
     L09_Vogelhaus_Classes.FylingBirdRight = FylingBirdRight;
