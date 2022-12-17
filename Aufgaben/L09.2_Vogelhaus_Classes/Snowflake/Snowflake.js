@@ -11,9 +11,10 @@ var L09_Vogelhaus;
         constructor() {
             this.gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
             this.gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-            this.draw();
+            //this.draw();
         }
         draw() {
+            console.log("draw me");
             L09_Vogelhaus.crc2.save();
             L09_Vogelhaus.crc2.beginPath();
             L09_Vogelhaus.crc2.arc(this.x, this.y, this.r2, 0, 2 * Math.PI);

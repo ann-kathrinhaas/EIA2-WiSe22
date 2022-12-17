@@ -12,8 +12,8 @@ var L09_Vogelhaus;
     let crc2Heading;
     let golden = 0.62; // Goldener Schnitt
     console.log(golden);
-    let getImageData;
-    let snowflakes = [];
+    //let getImageData: ImageData;
+    //let snowflakes: Snowflake[] = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("#canvas");
         if (!canvas)
@@ -36,7 +36,8 @@ var L09_Vogelhaus;
         drawSnowman({ x: 100, y: 550 });
         drawChristmasTree({ x: 400, y: 460 });
         drawBirdHouse({ x: 650, y: 300 });
-        getImageData = L09_Vogelhaus.crc2.getImageData(0, 0, canvas.width, canvas.height);
+        //getImageData = crc2.getImageData(0, 0, canvas.width, canvas.height);
+        //drawSnowflake();
         drawBirds();
     }
     function drawArcHeading(_x, _y, _radius, _startAngle, _endAngle, _color) {
@@ -587,7 +588,7 @@ var L09_Vogelhaus;
 
             crc2.restore();
         }*/
-        let nStandingBirds1Right = Math.round(Math.random() * 5);
+        //let nStandingBirds1Right: number = Math.round(Math.random() * 5);
         let nStandingBirds1Left = Math.round(Math.random() * 5);
         let nStandingBirds2Right = Math.round(Math.random() * 5);
         let nStandingBirds2Left = Math.round(Math.random() * 5);
@@ -672,141 +673,150 @@ var L09_Vogelhaus;
             L09_Vogelhaus.crc2.translate(x, y);
             L09_Vogelhaus.crc2.restore();
         }
-        // Vögel im Häuschen
-        let random1 = Math.round(Math.random() * 1);
-        let random2 = Math.round(Math.random() * 1);
-        // linker Vogel
-        let x1 = [600, 610];
-        let y1 = [450, 430];
-        // rechter Vogel
-        let x2 = [670, 690];
-        let y2 = [440, 455];
-        let randomColor = Math.round(Math.random() * 2);
         /*
-        switch (random1) {
-            case 0:
-                switch (random2) {
-                    case 0:
-                        switch (randomColor) {
-                            case 0:
-                                drawBird1Right({x: x1[0], y: y1[0]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                                break;
-                            case 1:
-                                drawBird1Right({x: x1[0], y: y1[0]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                                break;
-                                case 2:
-                                    drawBird1Right({x: x1[0], y: y1[0]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                                    break;
-                        }
-                        //drawBird1Right({x: x1[0], y: y1[0]});
-                        switch (randomColor) {
-                            case 0:
-                                drawBird2left({x: x2[0], y: y2[0]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                                break;
-                            case 1:
-                                drawBird2left({x: x2[0], y: y2[0]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                                break;
-                            case 2:
-                                drawBird2left({x: x2[0], y: y2[0]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                                break;
-                        }
-                        //drawBird2left({x: x2[0], y: y2[0]});
-                        break;
-                    case 1:
-                        switch (randomColor) {
-                            case 0:
-                                drawBird1Right({x: x1[1], y: y1[1]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                                break;
-                            case 1:
-                                drawBird1Right({x: x1[1], y: y1[1]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                                break;
-                                case 2:
-                                    drawBird1Right({x: x1[1], y: y1[1]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                                    break;
-                        }
-                        //drawBird1Right({x: x1[1], y: y1[1]});
-                        switch (randomColor) {
-                            case 0:
-                                drawBird2left({x: x2[1], y: y2[1]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                                break;
-                            case 1:
-                                drawBird2left({x: x2[1], y: y2[1]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                                break;
-                            case 2:
-                                drawBird2left({x: x2[1], y: y2[1]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                                break;
-                        }
-                        //drawBird2left({x: x2[1], y: y2[1]});
-                        break;
-                }
-                break;
-            case 1:
-                switch (random2) {
-                    case 0:
-                        switch (randomColor) {
-                            case 0:
-                                drawBird2Right({x: x1[0], y: y1[0]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                                break;
-                            case 1:
-                                drawBird2Right({x: x1[0], y: y1[0]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                                break;
-                                case 2:
-                                    drawBird2Right({x: x1[0], y: y1[0]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                                    break;
-                        }
-                        //drawBird2Right({x: x1[0], y: y1[0]});
-                        switch (randomColor) {
-                            case 0:
-                                drawBird1Left({x: x2[0], y: y2[0]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                                break;
-                            case 1:
-                                drawBird1Left({x: x2[0], y: y2[0]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                                break;
-                            case 2:
-                                drawBird1Left({x: x2[0], y: y2[0]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                                break;
-                        }
-                        //drawBird1Left({x: x2[0], y: y2[0]});
-                        break;
-                    case 1:
-                        switch (randomColor) {
-                            case 0:
-                                drawBird2Right({x: x1[1], y: y1[1]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
-                                break;
-                            case 1:
-                                drawBird2Right({x: x1[1], y: y1[1]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
-                                break;
-                            case 2:
-                                drawBird2Right({x: x1[1], y: y1[1]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
-                                break;
-                        }
-                        //drawBird2Right({x: x1[1], y: y1[1]});
-                        switch (randomColor) {
-                            case 0:
-                                drawBird1Left({x: x2[1], y: y2[1]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
-                                break;
-                            case 1:
-                                drawBird1Left({x: x2[1], y: y2[1]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
-                                break;
-                            case 2:
-                                drawBird1Left({x: x2[1], y: y2[1]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
-                                break;
-                        }
-                        //drawBird1Left({x: x2[1], y: y2[1]});
-                        break;
-                }
-                break;
-        }
+                // Vögel im Häuschen
+                let random1: number = Math.round(Math.random() * 1);
+                let random2: number = Math.round(Math.random() * 1);
+        
+                // linker Vogel
+                let x1: number[] = [600, 610];
+                let y1: number[] = [450, 430];
+        
+                // rechter Vogel
+                let x2: number[] = [670, 690];
+                let y2: number[] = [440, 455];
+        */
+        /*
+       let randomColor: number = Math.round(Math.random() * 2);
+          
+       switch (random1) {
+           case 0:
+               switch (random2) {
+                   case 0:
+                       switch (randomColor) {
+                           case 0:
+                               drawBird1Right({x: x1[0], y: y1[0]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
+                               break;
+                           case 1:
+                               drawBird1Right({x: x1[0], y: y1[0]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
+                               break;
+                               case 2:
+                                   drawBird1Right({x: x1[0], y: y1[0]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
+                                   break;
+                       }
+                       //drawBird1Right({x: x1[0], y: y1[0]});
+                       switch (randomColor) {
+                           case 0:
+                               drawBird2left({x: x2[0], y: y2[0]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
+                               break;
+                           case 1:
+                               drawBird2left({x: x2[0], y: y2[0]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
+                               break;
+                           case 2:
+                               drawBird2left({x: x2[0], y: y2[0]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
+                               break;
+                       }
+                       //drawBird2left({x: x2[0], y: y2[0]});
+                       break;
+                   case 1:
+                       switch (randomColor) {
+                           case 0:
+                               drawBird1Right({x: x1[1], y: y1[1]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
+                               break;
+                           case 1:
+                               drawBird1Right({x: x1[1], y: y1[1]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
+                               break;
+                               case 2:
+                                   drawBird1Right({x: x1[1], y: y1[1]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
+                                   break;
+                       }
+                       //drawBird1Right({x: x1[1], y: y1[1]});
+                       switch (randomColor) {
+                           case 0:
+                               drawBird2left({x: x2[1], y: y2[1]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
+                               break;
+                           case 1:
+                               drawBird2left({x: x2[1], y: y2[1]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
+                               break;
+                           case 2:
+                               drawBird2left({x: x2[1], y: y2[1]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
+                               break;
+                       }
+                       //drawBird2left({x: x2[1], y: y2[1]});
+                       break;
+               }
+               break;
+           case 1:
+               switch (random2) {
+                   case 0:
+                       switch (randomColor) {
+                           case 0:
+                               drawBird2Right({x: x1[0], y: y1[0]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
+                               break;
+                           case 1:
+                               drawBird2Right({x: x1[0], y: y1[0]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
+                               break;
+                               case 2:
+                                   drawBird2Right({x: x1[0], y: y1[0]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
+                                   break;
+                       }
+                       //drawBird2Right({x: x1[0], y: y1[0]});
+                       switch (randomColor) {
+                           case 0:
+                               drawBird1Left({x: x2[0], y: y2[0]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
+                               break;
+                           case 1:
+                               drawBird1Left({x: x2[0], y: y2[0]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
+                               break;
+                           case 2:
+                               drawBird1Left({x: x2[0], y: y2[0]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
+                               break;
+                       }
+                       //drawBird1Left({x: x2[0], y: y2[0]});
+                       break;
+                   case 1:
+                       switch (randomColor) {
+                           case 0:
+                               drawBird2Right({x: x1[1], y: y1[1]}, "HSL(0, 100%, 50%)", "HSL(0, 80%, 40%)", "HSL(0, 92%, 65%)");
+                               break;
+                           case 1:
+                               drawBird2Right({x: x1[1], y: y1[1]}, "HSL(240, 100%, 50%)", "HSL(240, 93%, 35%)", "HSL(240, 82%, 63%)");
+                               break;
+                           case 2:
+                               drawBird2Right({x: x1[1], y: y1[1]}, "HSL(350, 87%, 69%)", "HSL(350, 93%, 60%)", "HSL(350, 100%, 88%)");
+                               break;
+                       }
+                       //drawBird2Right({x: x1[1], y: y1[1]});
+                       switch (randomColor) {
+                           case 0:
+                               drawBird1Left({x: x2[1], y: y2[1]}, "HSL(300, 76%, 72%)", "HSL(300, 94%, 65%)", "HSL(300, 58%, 79%)");
+                               break;
+                           case 1:
+                               drawBird1Left({x: x2[1], y: y2[1]}, "HSL(120, 67%, 51%)", "HSL(120, 91%, 38%)", "HSL(120, 61%, 69%)");
+                               break;
+                           case 2:
+                               drawBird1Left({x: x2[1], y: y2[1]}, "HSL(39, 84%, 59%)", "HSL(39, 94%, 51%)", "HSL(39, 82%, 68%)");
+                               break;
+                       }
+                       //drawBird1Left({x: x2[1], y: y2[1]});
+                       break;
+               }
+               break;
+       }
 
-        crc2.restore();
-    } */
-        function drawSnowflakes() {
-            console.log("Snowflakes");
-            let nSnowflakes = (Math.round(Math.random() * 200) + 70);
-            for (let drawn = 0; drawn < nSnowflakes; drawn++) {
-                snowflakes.push(new L09_Vogelhaus.Snowflake());
+       crc2.restore();
+   } */
+        /*
+                function drawSnowflakes(): void {
+                console.log("Snowflakes");
+        
+                let nSnowflakes: number = (Math.round(Math.random() * 200) + 70);
+        
+                for (let drawn: number = 0; drawn < nSnowflakes; drawn++) {
+                    snowflakes.push(new Snowflake());
+                }
             }
-        }
+            */
     }
 })(L09_Vogelhaus || (L09_Vogelhaus = {}));
 //# sourceMappingURL=Main.js.map
