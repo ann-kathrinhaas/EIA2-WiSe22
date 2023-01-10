@@ -88,7 +88,6 @@ namespace L09_Vogelhaus_Classes {
             crc2.closePath();
         }
 
-
         draw(): void {
             crc2.save();
             crc2.translate(this.position.x, this.position.y);

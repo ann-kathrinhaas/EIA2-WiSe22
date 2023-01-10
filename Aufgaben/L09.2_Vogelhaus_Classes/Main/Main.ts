@@ -85,23 +85,24 @@ namespace L09_Vogelhaus_Classes {
         }
 
         for (let bird1Right of birds1Right) {
-            bird1Right.move();
-            bird1Right.draw();
+            //bird1Right.move();
+            //bird1Right.draw();
         }
 
         for (let bird1Left of birds1Left) {
-            bird1Left.move();
+            //bird1Left.move();
             bird1Left.draw();
+            bird1Left.changeState();
         }
 
         for (let bird2Right of birds2Right) {
-            bird2Right.move();
-            bird2Right.draw();
+            //bird2Right.move();
+            //bird2Right.draw();
         }
 
         for (let bird2Left of birds2Left) {
-            bird2Left.move();
-            bird2Left.draw();
+            //bird2Left.move();
+            //bird2Left.draw();
         }
     }
 

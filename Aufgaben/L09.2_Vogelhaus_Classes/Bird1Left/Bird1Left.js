@@ -10,6 +10,7 @@ var L09_Vogelhaus_Classes;
         colorBody;
         colorHead;
         velocity = Math.random() * 2;
+        state = "Stand";
         constructor() {
             switch (this.randomColor) {
                 case 0:
@@ -83,7 +84,7 @@ var L09_Vogelhaus_Classes;
             L09_Vogelhaus_Classes.crc2.fill();
             L09_Vogelhaus_Classes.crc2.closePath();
         }
-        draw() {
+        drawStanding() {
             L09_Vogelhaus_Classes.crc2.save();
             L09_Vogelhaus_Classes.crc2.translate(this.position.x, this.position.y);
             this.drawTail(13, -3, 20, -8, 18, -3, 20, 0, 18, 3, 20, 8, 13, 3, this.colorWing); // Schwanzfedern
@@ -96,6 +97,43 @@ var L09_Vogelhaus_Classes;
             this.drawLine(2, 10, 2, 20, "black", 2, 1); // Fuß rechts
             this.drawTriangle(-20, -15, -20, -9, -28, -12, "HSL(27, 82%, 51%)"); // Schnabel
             L09_Vogelhaus_Classes.crc2.restore();
+        }
+        drawPicking() {
+            L09_Vogelhaus_Classes.crc2.save();
+            L09_Vogelhaus_Classes.crc2.translate(this.position.x, this.position.y);
+            this.drawTail(13, -3, 20, -8, 18, -3, 20, 0, 18, 3, 20, 8, 13, 3, this.colorWing); // Schwanzfedern
+            this.drawEllipse(0, 0, 15, 10, 0, 0, 2, this.colorBody); // Körper
+            this.drawEllipse(4, -2, 8, 10, 0, 0.5, 1, this.colorWing); // Flügel
+            this.drawArc(-12, 8, 9, 0, 2 * Math.PI, this.colorHead); // Kopf
+            this.drawArc(-14, 6, 2.5, 0, 2 * Math.PI, "white"); // Auge
+            this.drawArc(-14, 6, 1, 0, 2 * Math.PI, "black"); // Auge
+            this.drawLine(-2, 10, -2, 20, "black", 2, 1); // Fuß links
+            this.drawLine(2, 10, 2, 20, "black", 2, 1); // Fuß rechts
+            this.drawTriangle(-20, -15, -20, -9, -28, -12, "HSL(27, 82%, 51%)"); // Schnabel
+            L09_Vogelhaus_Classes.crc2.restore();
+        }
+        draw() {
+            switch (this.state) {
+                case "Stand":
+                    this.drawStanding();
+                    break;
+                case "Pick":
+                    this.drawPicking();
+                    break;
+            }
+            // if (Math.random() < 0.1)
+            setInterval(this.changeState, 100, 50);
+        }
+        changeState() {
+            //console.log("Change state");
+            switch (this.state) {
+                case "Stand":
+                    this.state = "Pick";
+                    break;
+                case "Pick":
+                    this.state = "Stand";
+                    break;
+            }
         }
         move() {
             this.position.x -= this.velocity;
