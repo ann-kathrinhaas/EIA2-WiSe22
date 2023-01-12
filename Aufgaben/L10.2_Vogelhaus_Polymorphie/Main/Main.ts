@@ -2,7 +2,7 @@
 Aufgabe: L10.2 Vogelhaus Polymorphie
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: 10.01.23
+Datum: 12.01.23
 Quellen: -
 */
 
@@ -22,13 +22,7 @@ namespace L10_Vogelhaus_Polymorphie {
 
     let background: ImageData;
 
-    let snowflakes: Snowflake[] = [];
-    let flyingBirdsRight: FylingBirdRight[] = [];
-    let flyingBirdsLeft: FlyingBirdLeft[] = [];
-    let birds1Right: Bird1Right[] = [];
-    let birds1Left: Bird1Left[] = [];
-    let birds2Right: Bird2Right[] = [];
-    let birds2Left: Bird2Left[] = [];
+    let moveables: Moveable[] = [];
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
@@ -69,39 +63,9 @@ namespace L10_Vogelhaus_Polymorphie {
     function update(): void {
         crc2.putImageData(background, 0, 0);
 
-        for (let snowflake of snowflakes) {
-            snowflake.move(); 
-            snowflake.draw();
-        }
-
-        for (let flyingBirdRight of flyingBirdsRight) {
-            flyingBirdRight.move(); 
-            flyingBirdRight.draw();
-        }
-
-        for (let flyingBirdLeft of flyingBirdsLeft) {
-            flyingBirdLeft.move();
-            flyingBirdLeft.draw();
-        }
-
-        for (let bird1Right of birds1Right) {
-            bird1Right.move();
-            bird1Right.draw();
-        }
-
-        for (let bird1Left of birds1Left) {
-            bird1Left.move();
-            bird1Left.draw();
-        }
-
-        for (let bird2Right of birds2Right) {
-            bird2Right.move();
-            bird2Right.draw();
-        }
-
-        for (let bird2Left of birds2Left) {
-            bird2Left.move();
-            bird2Left.draw();
+        for (let moveable of moveables) { 
+            moveable.draw();
+            moveable.move();
         }
     }
 
@@ -111,7 +75,7 @@ namespace L10_Vogelhaus_Polymorphie {
         let nSnowflakes: number = (Math.round(Math.random() * 200) + 100);
 
         for (let drawn: number = 0; drawn < nSnowflakes; drawn++) {
-            snowflakes.push(new Snowflake());
+            moveables.push(new Snowflake());
         }
     }
 
@@ -143,11 +107,11 @@ namespace L10_Vogelhaus_Polymorphie {
         }
 
         for (let drawn: number = 0; drawn < nFlyingBirdsRight; drawn++) {
-            flyingBirdsRight.push(new FylingBirdRight());
+            moveables.push(new FylingBirdRight());
         }
 
         for (let drawn: number = 0; drawn < nFlyingBirdsLeft; drawn++) {
-            flyingBirdsLeft.push(new FlyingBirdLeft());
+            moveables.push(new FlyingBirdLeft());
         }
 
         let nStandingBirds1Right: number = Math.round((Math.random() * 5) + 3);
@@ -156,19 +120,19 @@ namespace L10_Vogelhaus_Polymorphie {
         let nStandingBirds2Left: number = Math.round((Math.random() * 5) + 3);
 
         for (let drawn: number = 0; drawn < nStandingBirds1Right; drawn++) {
-            birds1Right.push(new Bird1Right());
+            moveables.push(new Bird1Right());
         }
 
         for (let drawn: number = 0; drawn < nStandingBirds1Left; drawn++) {
-            birds1Left.push(new Bird1Left());
+            moveables.push(new Bird1Left());
         }
 
         for (let drawn: number = 0; drawn < nStandingBirds2Right; drawn++) {
-            birds2Right.push(new Bird2Right());
+            moveables.push(new Bird2Right());
         }
 
         for (let drawn: number = 0; drawn < nStandingBirds2Left; drawn++) {
-            birds2Left.push(new Bird2Left());
+            moveables.push(new Bird2Left());
         }
     }
 

@@ -1,6 +1,6 @@
 "use strict";
-var L09_Vogelhaus_Classes;
-(function (L09_Vogelhaus_Classes) {
+var L10_Vogelhaus_Polymorphie;
+(function (L10_Vogelhaus_Polymorphie) {
     class Vector2 {
         x;
         y;
@@ -26,6 +26,6 @@ var L09_Vogelhaus_Classes;
             this.scale(length);
         }
     }
-    L09_Vogelhaus_Classes.Vector2 = Vector2;
-})(L09_Vogelhaus_Classes || (L09_Vogelhaus_Classes = {}));
+    L10_Vogelhaus_Polymorphie.Vector2 = Vector2;
+})(L10_Vogelhaus_Polymorphie || (L10_Vogelhaus_Polymorphie = {}));
 //# sourceMappingURL=Vector2.js.map

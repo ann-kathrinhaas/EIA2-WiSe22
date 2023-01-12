@@ -1,12 +1,15 @@
-namespace L09_Vogelhaus_Classes {
-    export class Snowflake {
+namespace L10_Vogelhaus_Polymorphie {
+    export class Snowflake extends Moveable {
         position: Vector2 = new Vector2(Math.round(Math.random() * innerWidth), Math.round(Math.random() * innerHeight));
         r1: number = Math.round((Math.random() * 4) + 1);
         r2: number = Math.round((Math.random() * 6) + 4);
         gradient: CanvasGradient = crc2.createRadialGradient(0, 0, this.r1, 0, 0, this.r2);
-        velocity: number = (Math.random() * 3) + 1;
+        velocityRandom: number = (Math.random() * 3) + 1;
+        velocity: Vector2 = new Vector2(this.velocityRandom, this.velocityRandom);
 
         constructor() {
+            super();
+
             this.gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
             this.gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
             this.draw();
@@ -24,12 +27,6 @@ namespace L09_Vogelhaus_Classes {
         }
 
         move(): void {
-            this.position.y += this.velocity;
-            this.position.x += this.velocity;
-
-            if (this.position.y > crc2.canvas.height)
-                this.position.y -= crc2.canvas.height;
-            if (this.position.x > crc2.canvas.width)
-                this.position.x -= crc2.canvas.width;
+            super.move();
         }
 }}

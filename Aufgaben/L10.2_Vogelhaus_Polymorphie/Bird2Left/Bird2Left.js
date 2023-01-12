@@ -1,16 +1,18 @@
 "use strict";
-var L09_Vogelhaus_Classes;
-(function (L09_Vogelhaus_Classes) {
-    class Bird2Left {
-        position = new L09_Vogelhaus_Classes.Vector2(Math.round((Math.random() * L09_Vogelhaus_Classes.crc2.canvas.width)), Math.round(Math.random() * L09_Vogelhaus_Classes.crc2.canvas.height) + 450);
+var L10_Vogelhaus_Polymorphie;
+(function (L10_Vogelhaus_Polymorphie) {
+    class Bird2Left extends L10_Vogelhaus_Polymorphie.Moveable {
+        position = new L10_Vogelhaus_Polymorphie.Vector2(Math.round((Math.random() * L10_Vogelhaus_Polymorphie.crc2.canvas.width)), Math.round(Math.random() * L10_Vogelhaus_Polymorphie.crc2.canvas.height) + 450);
         x = Math.round((Math.random() * 500) + 220);
         y = Math.round((Math.random() * 500) + 450);
         randomColor = Math.round(Math.random() * 2);
         colorWing;
         colorBody;
         colorHead;
-        velocity = Math.random() * 2;
+        velocityRandom = Math.random() * 2;
+        velocity = new L10_Vogelhaus_Polymorphie.Vector2(this.velocityRandom, 0);
         constructor() {
+            super();
             switch (this.randomColor) {
                 case 0:
                     this.colorWing = "HSL(0, 100%, 50%)";
@@ -31,48 +33,48 @@ var L09_Vogelhaus_Classes;
             this.draw();
         }
         drawEllipse(_x, _y, _radiusX, _radiusY, _rotation, _startAngle, _endAngle, _color) {
-            L09_Vogelhaus_Classes.crc2.beginPath();
-            L09_Vogelhaus_Classes.crc2.ellipse(_x, _y, _radiusX, _radiusY, _rotation, _startAngle, _endAngle * Math.PI);
-            L09_Vogelhaus_Classes.crc2.fillStyle = _color;
-            L09_Vogelhaus_Classes.crc2.fill();
-            L09_Vogelhaus_Classes.crc2.closePath();
+            L10_Vogelhaus_Polymorphie.crc2.beginPath();
+            L10_Vogelhaus_Polymorphie.crc2.ellipse(_x, _y, _radiusX, _radiusY, _rotation, _startAngle, _endAngle * Math.PI);
+            L10_Vogelhaus_Polymorphie.crc2.fillStyle = _color;
+            L10_Vogelhaus_Polymorphie.crc2.fill();
+            L10_Vogelhaus_Polymorphie.crc2.closePath();
         }
         drawArc(_x, _y, _radius, _startAngle, _endAngle, _color) {
-            L09_Vogelhaus_Classes.crc2.beginPath();
-            L09_Vogelhaus_Classes.crc2.arc(_x, _y, _radius, _startAngle, _endAngle * Math.PI);
-            L09_Vogelhaus_Classes.crc2.fillStyle = _color;
-            L09_Vogelhaus_Classes.crc2.fill();
-            L09_Vogelhaus_Classes.crc2.closePath();
+            L10_Vogelhaus_Polymorphie.crc2.beginPath();
+            L10_Vogelhaus_Polymorphie.crc2.arc(_x, _y, _radius, _startAngle, _endAngle * Math.PI);
+            L10_Vogelhaus_Polymorphie.crc2.fillStyle = _color;
+            L10_Vogelhaus_Polymorphie.crc2.fill();
+            L10_Vogelhaus_Polymorphie.crc2.closePath();
         }
         drawLine(_x1, _y1, _x2, _y2, _color, _lineWidth, _lineCap) {
-            L09_Vogelhaus_Classes.crc2.beginPath();
-            L09_Vogelhaus_Classes.crc2.moveTo(_x1, _y1);
-            L09_Vogelhaus_Classes.crc2.lineTo(_x2, _y2);
-            L09_Vogelhaus_Classes.crc2.strokeStyle = _color;
-            L09_Vogelhaus_Classes.crc2.lineWidth = _lineWidth;
+            L10_Vogelhaus_Polymorphie.crc2.beginPath();
+            L10_Vogelhaus_Polymorphie.crc2.moveTo(_x1, _y1);
+            L10_Vogelhaus_Polymorphie.crc2.lineTo(_x2, _y2);
+            L10_Vogelhaus_Polymorphie.crc2.strokeStyle = _color;
+            L10_Vogelhaus_Polymorphie.crc2.lineWidth = _lineWidth;
             switch (_lineCap) {
                 case 1:
-                    L09_Vogelhaus_Classes.crc2.lineCap = "butt";
+                    L10_Vogelhaus_Polymorphie.crc2.lineCap = "butt";
                     break;
                 case 2:
-                    L09_Vogelhaus_Classes.crc2.lineCap = "round";
+                    L10_Vogelhaus_Polymorphie.crc2.lineCap = "round";
                     break;
             }
-            L09_Vogelhaus_Classes.crc2.stroke();
-            L09_Vogelhaus_Classes.crc2.closePath();
+            L10_Vogelhaus_Polymorphie.crc2.stroke();
+            L10_Vogelhaus_Polymorphie.crc2.closePath();
         }
         drawTriangle(_x1, _y1, _x2, _y2, _x3, _y3, _color) {
-            L09_Vogelhaus_Classes.crc2.beginPath();
-            L09_Vogelhaus_Classes.crc2.moveTo(_x1, _y1);
-            L09_Vogelhaus_Classes.crc2.lineTo(_x2, _y2);
-            L09_Vogelhaus_Classes.crc2.lineTo(_x3, _y3);
-            L09_Vogelhaus_Classes.crc2.fillStyle = _color;
-            L09_Vogelhaus_Classes.crc2.fill();
-            L09_Vogelhaus_Classes.crc2.closePath();
+            L10_Vogelhaus_Polymorphie.crc2.beginPath();
+            L10_Vogelhaus_Polymorphie.crc2.moveTo(_x1, _y1);
+            L10_Vogelhaus_Polymorphie.crc2.lineTo(_x2, _y2);
+            L10_Vogelhaus_Polymorphie.crc2.lineTo(_x3, _y3);
+            L10_Vogelhaus_Polymorphie.crc2.fillStyle = _color;
+            L10_Vogelhaus_Polymorphie.crc2.fill();
+            L10_Vogelhaus_Polymorphie.crc2.closePath();
         }
         draw() {
-            L09_Vogelhaus_Classes.crc2.save();
-            L09_Vogelhaus_Classes.crc2.translate(this.position.x, this.position.y);
+            L10_Vogelhaus_Polymorphie.crc2.save();
+            L10_Vogelhaus_Polymorphie.crc2.translate(this.position.x, this.position.y);
             this.drawEllipse(0, -5, 15, 15, 0, 0.4, 1, this.colorBody); // Körper
             this.drawEllipse(-2, -2, 7, 8, -0.4, 0, 1, this.colorWing); // Flügel
             this.drawArc(-12, -12, 9, 0, 2 * Math.PI, this.colorBody); // Kopf
@@ -81,14 +83,14 @@ var L09_Vogelhaus_Classes;
             this.drawLine(-2, 10, -2, 20, "black", 2, 1); // Fuß links
             this.drawLine(2, 10, 2, 20, "black", 2, 1); // Fuß rechts
             this.drawTriangle(-20, -15, -20, -9, -28, -12, "HSL(27, 82%, 51%)"); // Schnabel
-            L09_Vogelhaus_Classes.crc2.restore();
+            L10_Vogelhaus_Polymorphie.crc2.restore();
         }
         move() {
-            this.position.x -= this.velocity;
+            this.position.x -= this.velocity.x;
             if (this.position.x < 0)
-                this.position.x -= L09_Vogelhaus_Classes.crc2.canvas.width;
+                this.position.x -= L10_Vogelhaus_Polymorphie.crc2.canvas.width;
         }
     }
-    L09_Vogelhaus_Classes.Bird2Left = Bird2Left;
-})(L09_Vogelhaus_Classes || (L09_Vogelhaus_Classes = {}));
+    L10_Vogelhaus_Polymorphie.Bird2Left = Bird2Left;
+})(L10_Vogelhaus_Polymorphie || (L10_Vogelhaus_Polymorphie = {}));
 //# sourceMappingURL=Bird2Left.js.map

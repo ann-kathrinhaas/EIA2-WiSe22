@@ -1,4 +1,4 @@
-namespace L09_Vogelhaus_Classes {
+namespace L10_Vogelhaus_Polymorphie {
     export class Vector2 {
         x: number;
         y: number;

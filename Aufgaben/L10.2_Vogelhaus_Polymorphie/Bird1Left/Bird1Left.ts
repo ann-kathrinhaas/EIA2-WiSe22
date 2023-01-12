@@ -1,5 +1,5 @@
-namespace L09_Vogelhaus_Classes {
-    export class Bird1Left {
+namespace L10_Vogelhaus_Polymorphie {
+    export class Bird1Left extends Moveable {
         position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
         x: number = Math.round((Math.random() * 500) + 220);
         y: number = Math.round((Math.random() * 500) + 450);
@@ -7,9 +7,12 @@ namespace L09_Vogelhaus_Classes {
         colorWing: string;
         colorBody: string;
         colorHead: string;
-        velocity: number = Math.random() * 2;
+        velocityRandom: number = Math.random() * 2;
+        velocity: Vector2 = new Vector2(this.velocityRandom, 0);
 
         constructor() {   
+            super();
+
             switch (this.randomColor) {
                 case 0:
                     this.colorWing = "HSL(300, 76%, 72%)";
@@ -106,7 +109,7 @@ namespace L09_Vogelhaus_Classes {
         }
 
         move(): void {
-            this.position.x -= this.velocity;
+            this.position.x -= this.velocity.x;
 
             if (this.position.x < 0)
                 this.position.x += crc2.canvas.width;

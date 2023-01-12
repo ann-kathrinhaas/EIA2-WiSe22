@@ -1,13 +1,16 @@
-namespace L09_Vogelhaus_Classes {
-    export class FlyingBirdLeft {
+namespace L10_Vogelhaus_Polymorphie {
+    export class FlyingBirdLeft extends Moveable {
         position: Vector2 = new Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
         randomColor: number = Math.round(Math.random() * 2);
         colorWing: string;
         colorBody: string;
         colorHead: string;
-        velocity: number = (Math.random() * 4) + 1.5;
+        velocityRandom: number = (Math.random() * 4) + 1.5;
+        velocity: Vector2 = new Vector2(this.velocityRandom, 0);
 
         constructor() {
+            super();
+
             switch (this.randomColor) {
                 case 0:
                     this.colorWing = "HSL(300, 76%, 72%)";
@@ -63,11 +66,10 @@ namespace L09_Vogelhaus_Classes {
         }
 
         move(): void {
-            this.position.x -= this.velocity;
+            this.position.x -= this.velocity.x;
          
             if (this.position.x < 0)
                 this.position.x += crc2.canvas.width;
-
         }
     }
 }
