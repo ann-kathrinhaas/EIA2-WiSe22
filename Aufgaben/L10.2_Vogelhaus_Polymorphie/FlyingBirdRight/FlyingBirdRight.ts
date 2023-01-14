@@ -7,6 +7,7 @@ namespace L10_Vogelhaus_Polymorphie {
         colorHead: string;
         velocityRandom: number = (Math.random() * 4) + 1.5;
         velocity: Vector2 = new Vector2(this.velocityRandom, 0);
+        direction: string = "right";
 
         constructor() {
             super();

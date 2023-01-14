@@ -7,6 +7,7 @@ namespace L10_Vogelhaus_Polymorphie {
         colorHead: string;
         velocityRandom: number = (Math.random() * 4) + 1.5;
         velocity: Vector2 = new Vector2(this.velocityRandom, 0);
+        direction: string = "left";
 
         constructor() {
             super();
@@ -66,10 +67,7 @@ namespace L10_Vogelhaus_Polymorphie {
         }
 
         move(): void {
-            this.position.x -= this.velocity.x;
-         
-            if (this.position.x < 0)
-                this.position.x += crc2.canvas.width;
+            super.move();
         }
     }
 }

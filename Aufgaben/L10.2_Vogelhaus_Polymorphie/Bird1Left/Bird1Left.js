@@ -11,6 +11,7 @@ var L10_Vogelhaus_Polymorphie;
         colorHead;
         velocityRandom = Math.random() * 2;
         velocity = new L10_Vogelhaus_Polymorphie.Vector2(this.velocityRandom, 0);
+        direction = "left";
         constructor() {
             super();
             switch (this.randomColor) {
@@ -100,9 +101,7 @@ var L10_Vogelhaus_Polymorphie;
             L10_Vogelhaus_Polymorphie.crc2.restore();
         }
         move() {
-            this.position.x -= this.velocity.x;
-            if (this.position.x < 0)
-                this.position.x += L10_Vogelhaus_Polymorphie.crc2.canvas.width;
+            super.move();
         }
     }
     L10_Vogelhaus_Polymorphie.Bird1Left = Bird1Left;

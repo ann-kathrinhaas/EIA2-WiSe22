@@ -9,6 +9,7 @@ var L10_Vogelhaus_Polymorphie;
         colorHead;
         velocityRandom = (Math.random() * 4) + 1.5;
         velocity = new L10_Vogelhaus_Polymorphie.Vector2(this.velocityRandom, 0);
+        direction = "right";
         constructor() {
             super();
             switch (this.randomColor) {

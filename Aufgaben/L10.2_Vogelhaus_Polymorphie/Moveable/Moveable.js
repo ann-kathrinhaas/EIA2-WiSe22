@@ -5,16 +5,23 @@ var L10_Vogelhaus_Polymorphie;
         position;
         velocity;
         velocityRandom;
+        direction;
         draw() {
             //
         }
         move() {
-            this.position.y += this.velocity.y;
-            this.position.x += this.velocity.x;
-            if (this.position.y > L10_Vogelhaus_Polymorphie.crc2.canvas.height)
-                this.position.y -= L10_Vogelhaus_Polymorphie.crc2.canvas.height;
-            if (this.position.x > L10_Vogelhaus_Polymorphie.crc2.canvas.width)
-                this.position.x -= L10_Vogelhaus_Polymorphie.crc2.canvas.width;
+            switch (this.direction) {
+                case "right":
+                    this.position.x += this.velocity.x;
+                    if (this.position.x > L10_Vogelhaus_Polymorphie.crc2.canvas.width)
+                        this.position.x -= L10_Vogelhaus_Polymorphie.crc2.canvas.width;
+                    break;
+                case "left":
+                    this.position.x -= this.velocity.x;
+                    if (this.position.x < 0)
+                        this.position.x += L10_Vogelhaus_Polymorphie.crc2.canvas.width;
+                    break;
+            }
         }
     }
     L10_Vogelhaus_Polymorphie.Moveable = Moveable;
