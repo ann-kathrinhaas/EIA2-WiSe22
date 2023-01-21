@@ -19,6 +19,15 @@ namespace L11_Vogelhaus_Advanced  {
         DOWN
     }
 
+    enum BIRD {
+        FLYINGBIRDRIGHT,
+        FLYINGBIRDLEFT,
+        BIRD1RIGHT,
+        BIRD1LEFT,
+        BIRD2RIGHT,
+        BIRD2LEFT
+    }
+
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
@@ -69,20 +78,12 @@ namespace L11_Vogelhaus_Advanced  {
         window.setInterval(update, 20);
     }
 
-    enum BIRD {
-        FLYINGBIRDRIGHT,
-        FLYINGBIRDLEFT,
-        BIRD1RIGHT,
-        BIRD1LEFT,
-        BIRD2RIGHT,
-        BIRD2LEFT
-    }
-
     function drawNewBird(_event: MouseEvent): void {
         let position: Vector2 = new Vector2(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
 
-        if (position.y < 200) {
+        if (position.y < 400) {
             let randomFlyingBird: number = Math.round(Math.random() * 1);
+            console.log(randomFlyingBird);
             switch (randomFlyingBird) {
                 case BIRD.FLYINGBIRDRIGHT:
                     moveables.push(new FlyingBirdRight(position));
@@ -91,8 +92,8 @@ namespace L11_Vogelhaus_Advanced  {
                     moveables.push(new FlyingBirdLeft(position));
                     break;
                 }
-        } else if (position.y > 200) {
-            let randomStandingBird: number = Math.round(Math.random() * 3);
+        } else if (position.y > 400) {
+            let randomStandingBird: number = Math.round((Math.random() * 5) + 2);
             console.log(randomStandingBird);
             switch (randomStandingBird) {
                 case BIRD.BIRD1RIGHT:

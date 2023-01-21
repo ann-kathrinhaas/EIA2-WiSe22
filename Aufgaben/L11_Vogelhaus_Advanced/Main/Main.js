@@ -14,6 +14,15 @@ var L11_Vogelhaus_Advanced;
         DIRECTION[DIRECTION["LEFT"] = 1] = "LEFT";
         DIRECTION[DIRECTION["DOWN"] = 2] = "DOWN";
     })(DIRECTION = L11_Vogelhaus_Advanced.DIRECTION || (L11_Vogelhaus_Advanced.DIRECTION = {}));
+    let BIRD;
+    (function (BIRD) {
+        BIRD[BIRD["FLYINGBIRDRIGHT"] = 0] = "FLYINGBIRDRIGHT";
+        BIRD[BIRD["FLYINGBIRDLEFT"] = 1] = "FLYINGBIRDLEFT";
+        BIRD[BIRD["BIRD1RIGHT"] = 2] = "BIRD1RIGHT";
+        BIRD[BIRD["BIRD1LEFT"] = 3] = "BIRD1LEFT";
+        BIRD[BIRD["BIRD2RIGHT"] = 4] = "BIRD2RIGHT";
+        BIRD[BIRD["BIRD2LEFT"] = 5] = "BIRD2LEFT";
+    })(BIRD || (BIRD = {}));
     window.addEventListener("load", handleLoad);
     let crc2Heading;
     let golden = 0.62; // Goldener Schnitt
@@ -48,19 +57,11 @@ var L11_Vogelhaus_Advanced;
         canvas.addEventListener("click", drawNewBird);
         window.setInterval(update, 20);
     }
-    let BIRD;
-    (function (BIRD) {
-        BIRD[BIRD["FLYINGBIRDRIGHT"] = 0] = "FLYINGBIRDRIGHT";
-        BIRD[BIRD["FLYINGBIRDLEFT"] = 1] = "FLYINGBIRDLEFT";
-        BIRD[BIRD["BIRD1RIGHT"] = 2] = "BIRD1RIGHT";
-        BIRD[BIRD["BIRD1LEFT"] = 3] = "BIRD1LEFT";
-        BIRD[BIRD["BIRD2RIGHT"] = 4] = "BIRD2RIGHT";
-        BIRD[BIRD["BIRD2LEFT"] = 5] = "BIRD2LEFT";
-    })(BIRD || (BIRD = {}));
     function drawNewBird(_event) {
         let position = new L11_Vogelhaus_Advanced.Vector2(_event.clientX - L11_Vogelhaus_Advanced.crc2.canvas.offsetLeft, _event.clientY - L11_Vogelhaus_Advanced.crc2.canvas.offsetTop);
-        if (position.y < 200) {
+        if (position.y < 400) {
             let randomFlyingBird = Math.round(Math.random() * 1);
+            console.log(randomFlyingBird);
             switch (randomFlyingBird) {
                 case BIRD.FLYINGBIRDRIGHT:
                     moveables.push(new L11_Vogelhaus_Advanced.FlyingBirdRight(position));
@@ -70,8 +71,8 @@ var L11_Vogelhaus_Advanced;
                     break;
             }
         }
-        else if (position.y > 200) {
-            let randomStandingBird = Math.round(Math.random() * 3);
+        else if (position.y > 400) {
+            let randomStandingBird = Math.round((Math.random() * 5) + 2);
             console.log(randomStandingBird);
             switch (randomStandingBird) {
                 case BIRD.BIRD1RIGHT:
