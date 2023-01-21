@@ -2,7 +2,7 @@
 Aufgabe: L11 Vogelhaus Advanced
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: 19.01.23
+Datum: 21.01.23
 Quellen: -
 */
 
@@ -62,9 +62,54 @@ namespace L11_Vogelhaus_Advanced  {
 
         drawBirdsAnimated();
         drawSnowflakes();
+
+
+        canvas.addEventListener("click", drawNewBird);
         
         window.setInterval(update, 20);
     }
+
+    enum BIRD {
+        FLYINGBIRDRIGHT,
+        FLYINGBIRDLEFT,
+        BIRD1RIGHT,
+        BIRD1LEFT,
+        BIRD2RIGHT,
+        BIRD2LEFT
+    }
+
+    function drawNewBird(_event: MouseEvent): void {
+        let position: Vector2 = new Vector2(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
+
+        if (position.y < 200) {
+            let randomFlyingBird: number = Math.round(Math.random() * 1);
+            switch (randomFlyingBird) {
+                case BIRD.FLYINGBIRDRIGHT:
+                    moveables.push(new FlyingBirdRight(position));
+                    break;
+                case BIRD.FLYINGBIRDLEFT:
+                    moveables.push(new FlyingBirdLeft(position));
+                    break;
+                }
+        } else if (position.y > 200) {
+            let randomStandingBird: number = Math.round(Math.random() * 3);
+            console.log(randomStandingBird);
+            switch (randomStandingBird) {
+                case BIRD.BIRD1RIGHT:
+                    moveables.push(new Bird1Right(position));
+                    break;
+                case BIRD.BIRD1LEFT:
+                    moveables.push(new Bird1Left(position));
+                    break;
+                case BIRD.BIRD2RIGHT:
+                    moveables.push(new Bird2Right(position));
+                    break;
+                case BIRD.BIRD2LEFT:
+                    moveables.push(new Bird2Left(position));
+                    break;
+            }
+        }   
+    } 
 
     function update(): void {
         crc2.putImageData(background, 0, 0);
@@ -76,12 +121,13 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawSnowflakes(): void {
-        console.log("Snowflakes");
+        //console.log("Snowflakes");
 
         let nSnowflakes: number = (Math.round(Math.random() * 200) + 100);
 
         for (let drawn: number = 0; drawn < nSnowflakes; drawn++) {
-            moveables.push(new Snowflake());
+            let position: Vector2 = new Vector2(Math.round(Math.random() * innerWidth), Math.round(Math.random() * innerHeight));
+            moveables.push(new Snowflake(position));
         }
     }
 
@@ -113,11 +159,13 @@ namespace L11_Vogelhaus_Advanced  {
         }
 
         for (let drawn: number = 0; drawn < nFlyingBirdsRight; drawn++) {
-            moveables.push(new FylingBirdRight());
+            let position: Vector2 = new Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
+            moveables.push(new FlyingBirdRight(position));
         }
 
         for (let drawn: number = 0; drawn < nFlyingBirdsLeft; drawn++) {
-            moveables.push(new FlyingBirdLeft());
+            let position: Vector2 = new Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
+            moveables.push(new FlyingBirdLeft(position));
         }
 
         let nStandingBirds1Right: number = Math.round((Math.random() * 5) + 3);
@@ -126,19 +174,23 @@ namespace L11_Vogelhaus_Advanced  {
         let nStandingBirds2Left: number = Math.round((Math.random() * 5) + 3);
 
         for (let drawn: number = 0; drawn < nStandingBirds1Right; drawn++) {
-            moveables.push(new Bird1Right());
+            let position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
+            moveables.push(new Bird1Right(position));
         }
 
         for (let drawn: number = 0; drawn < nStandingBirds1Left; drawn++) {
-            moveables.push(new Bird1Left());
+            let position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
+            moveables.push(new Bird1Left(position));
         }
 
         for (let drawn: number = 0; drawn < nStandingBirds2Right; drawn++) {
-            moveables.push(new Bird2Right());
+            let position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
+            moveables.push(new Bird2Right(position));
         }
 
         for (let drawn: number = 0; drawn < nStandingBirds2Left; drawn++) {
-            moveables.push(new Bird2Left());
+            let position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
+            moveables.push(new Bird2Left(position));
         }
     }
 
@@ -188,7 +240,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawBackground(): void {
-        console.log("Background");
+        //console.log("Background");
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
@@ -201,7 +253,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawSun(_position: Vector): void {
-        console.log("Sun");
+        //console.log("Sun");
 
         let r1: number = 30;
         let r2: number = 100;
@@ -219,7 +271,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawCloud(_position: Vector, _size: Vector): void {
-        console.log("Cloud");
+        //console.log("Cloud");
 
         let nParticles: number = 80; // AD
         let radiusParticle: number = 25;
@@ -246,7 +298,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
-        console.log("Mountains");
+        //console.log("Mountains");
 
         let stepMin: number = 50;
         let stepMax: number = 150;
@@ -367,7 +419,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawTrees(): void {
-        console.log("Trees");
+        //console.log("Trees");
 
         let nTrees: number = (Math.round(Math.random() * 15) + 5);
         let horizon: number = crc2.canvas.height * golden;
@@ -507,7 +559,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawSnowman(_position: Vector): void {
-        console.log("Snowman");
+        //console.log("Snowman");
 
         let r: number[] = [50, 35, 20];
 
@@ -555,7 +607,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawBirdHouse(_position: Vector): void {
-        console.log("Bird House");
+        //console.log("Bird House");
 
         crc2.save();
         crc2.translate(_position.x, _position.y);
@@ -662,7 +714,7 @@ namespace L11_Vogelhaus_Advanced  {
     }
 
     function drawBirds(): void { // Vögel im Häuschen
-        console.log("Birds");
+        //console.log("Birds");
 
         crc2.save();
     

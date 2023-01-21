@@ -1,8 +1,8 @@
 "use strict";
 var L11_Vogelhaus_Advanced;
 (function (L11_Vogelhaus_Advanced) {
-    class FylingBirdRight extends L11_Vogelhaus_Advanced.Moveable {
-        position = new L11_Vogelhaus_Advanced.Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
+    class FlyingBirdRight extends L11_Vogelhaus_Advanced.Moveable {
+        //public position: Vector2 = new Vector2();
         velocityRandom = (Math.random() * 4) + 1.5;
         velocity = new L11_Vogelhaus_Advanced.Vector2(this.velocityRandom, 0);
         direction = L11_Vogelhaus_Advanced.DIRECTION.RIGHT;
@@ -10,8 +10,8 @@ var L11_Vogelhaus_Advanced;
         colorWing;
         colorBody;
         colorHead;
-        constructor() {
-            super();
+        constructor(_position) {
+            super(_position);
             switch (this.randomColor) {
                 case 0:
                     this.colorWing = "HSL(0, 100%, 50%)";
@@ -64,6 +64,6 @@ var L11_Vogelhaus_Advanced;
             L11_Vogelhaus_Advanced.crc2.closePath();
         }
     }
-    L11_Vogelhaus_Advanced.FylingBirdRight = FylingBirdRight;
+    L11_Vogelhaus_Advanced.FlyingBirdRight = FlyingBirdRight;
 })(L11_Vogelhaus_Advanced || (L11_Vogelhaus_Advanced = {}));
 //# sourceMappingURL=FlyingBirdRight.js.map

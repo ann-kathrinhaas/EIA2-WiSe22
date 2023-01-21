@@ -2,7 +2,7 @@
 var L11_Vogelhaus_Advanced;
 (function (L11_Vogelhaus_Advanced) {
     class Bird1Right extends L11_Vogelhaus_Advanced.Moveable {
-        position = new L11_Vogelhaus_Advanced.Vector2(Math.round((Math.random() * L11_Vogelhaus_Advanced.crc2.canvas.width)), Math.round(Math.random() * L11_Vogelhaus_Advanced.crc2.canvas.height) + 450);
+        //public position: Vector2 = new Vector2(Math.round((Math.random() * crc2.canvas.width)), Math.round(Math.random() * crc2.canvas.height) + 450);
         x = Math.round((Math.random() * 500) + 220);
         y = Math.round((Math.random() * 500) + 450);
         velocityRandom = Math.random() * 2;
@@ -12,8 +12,8 @@ var L11_Vogelhaus_Advanced;
         colorWing;
         colorBody;
         colorHead;
-        constructor() {
-            super();
+        constructor(_position) {
+            super(_position);
             switch (this.randomColor) {
                 case 0:
                     this.colorWing = "HSL(0, 100%, 50%)";

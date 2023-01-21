@@ -5,6 +5,11 @@ namespace L11_Vogelhaus_Advanced {
         public velocityRandom: number;
         protected direction: DIRECTION;
 
+        
+        constructor(_position: Vector2) {
+            this.position = _position;
+        }
+
         public abstract draw(): void;
 
         public move(): void {

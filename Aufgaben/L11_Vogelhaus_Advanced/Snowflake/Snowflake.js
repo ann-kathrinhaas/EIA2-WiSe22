@@ -2,15 +2,15 @@
 var L11_Vogelhaus_Advanced;
 (function (L11_Vogelhaus_Advanced) {
     class Snowflake extends L11_Vogelhaus_Advanced.Moveable {
-        position = new L11_Vogelhaus_Advanced.Vector2(Math.round(Math.random() * innerWidth), Math.round(Math.random() * innerHeight));
+        //public position: Vector2 = new Vector2(Math.round(Math.random() * innerWidth), Math.round(Math.random() * innerHeight));
         velocityRandom = (Math.random() * 3) + 1;
         velocity = new L11_Vogelhaus_Advanced.Vector2(this.velocityRandom, this.velocityRandom);
         direction = L11_Vogelhaus_Advanced.DIRECTION.DOWN;
         r1 = Math.round((Math.random() * 4) + 1);
         r2 = Math.round((Math.random() * 6) + 4);
         gradient = L11_Vogelhaus_Advanced.crc2.createRadialGradient(0, 0, this.r1, 0, 0, this.r2);
-        constructor() {
-            super();
+        constructor(_position) {
+            super(_position);
             this.gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
             this.gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
             this.draw();

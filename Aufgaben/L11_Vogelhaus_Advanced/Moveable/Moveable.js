@@ -6,6 +6,9 @@ var L11_Vogelhaus_Advanced;
         velocity;
         velocityRandom;
         direction;
+        constructor(_position) {
+            this.position = _position;
+        }
         move() {
             switch (this.direction) {
                 case L11_Vogelhaus_Advanced.DIRECTION.RIGHT:

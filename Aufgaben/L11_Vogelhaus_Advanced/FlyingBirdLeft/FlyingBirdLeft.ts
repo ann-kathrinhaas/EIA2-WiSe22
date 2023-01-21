@@ -1,6 +1,6 @@
 namespace L11_Vogelhaus_Advanced  {
     export class FlyingBirdLeft extends Moveable {
-        public position: Vector2 = new Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
+        //public position: Vector2 = new Vector2(Math.round((Math.random() * 700) + 50), Math.round((Math.random() * 200) + 50));
         public velocityRandom: number = (Math.random() * 4) + 1.5;
         public velocity: Vector2 = new Vector2(this.velocityRandom, 0);
         protected direction: DIRECTION = DIRECTION.LEFT;
@@ -9,8 +9,8 @@ namespace L11_Vogelhaus_Advanced  {
         private colorBody: string;
         private colorHead: string;
 
-        constructor() {
-            super();
+        constructor(_position: Vector2) {
+            super(_position);
 
             switch (this.randomColor) {
                 case 0:
@@ -49,7 +49,6 @@ namespace L11_Vogelhaus_Advanced  {
         }
 
         public move(): void {
-            console.log(this.position);
             super.move();
         }
 
